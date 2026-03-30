@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>WatchPad Auxiliar</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+
+<div id="home">
+<h1>🎓 WatchPad Auxiliar</h1>
+<p class="sub">Sistema de envio inteligente para alunos</p>
+
+<div class="menu">
+
+<div class="card" onclick="abrirLoginPais()">
+👨‍👩‍👧‍👦
+<h3>Pais</h3>
+<p>Acompanhe seu filho</p>
+</div>
+
+<div class="card" onclick="abrirLoginAluno()">
+👦
+<h3>Aluno</h3>
+<p>Mensagens e localização</p>
+</div>
+
+</div>
+</div>
+
+
+<div id="loginPais" class="hidden">
+<h2>Entrar como Pais</h2>
+
+<input placeholder="Email">
+<input type="password" placeholder="Senha">
+
+<button onclick="painelPais()">Entrar</button>
+<button onclick="voltar()">Voltar</button>
+</div>
+
+
+<div id="loginAluno" class="hidden">
+<h2>Entrar como Aluno</h2>
+
+<input placeholder="Usuário">
+<input type="password" placeholder="Senha">
+
+<button onclick="painelAluno()">Entrar</button>
+<button onclick="voltar()">Voltar</button>
+</div>
+
+
+<div id="pais" class="hidden">
+
+<h2>Painel dos Pais</h2>
+
+<h3>Localização do Aluno</h3>
+<div class="map">📍 Lucas está na escola</div>
+
+<h3>Enviar vídeo para o aluno</h3>
+
+<video id="camera" autoplay muted></video>
+<br>
+
+<button onclick="iniciarCamera()">Abrir Câmera</button>
+<button onclick="gravarVideo()">Gravar</button>
+<button onclick="pararGravacao()">Parar</button>
+
+<br><br>
+
+<video id="preview" controls></video>
+
+<h3>Chat com Professores</h3>
+
+<div class="chat" id="chatPais">
+<div class="msg">Professora: Lucas teve um ótimo dia!</div>
+</div>
+
+<input id="msgPais" placeholder="Digite mensagem">
+<button onclick="enviarMsgPais()">Enviar</button>
+
+<button onclick="logout()">Sair</button>
+
+</div>
+
+<div id="aluno" class="hidden">
+
+<h2>Olá Lucas 👋</h2>
+
+<h3>Onde você está</h3>
+<div class="map">📍 Escola Municipal</div>
+
+<h3>Mensagem dos Pais</h3>
+<video id="videoAluno" controls style="width:100%; border-radius:10px;"></video>
+
+<div class="map">🎥 Vídeo enviado pelos pais</div>
+
+<h3>Comunicação</h3>
+
+<div class="actions">
+<button class="action-btn">😊 Estou bem</button>
+<button class="action-btn">🚨 Preciso de ajuda</button>
+<button class="action-btn">💧 Quero água</button>
+<button class="action-btn">😔 Estou triste</button>
+</div>
+
+<button onclick="logout()">Sair</button>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
