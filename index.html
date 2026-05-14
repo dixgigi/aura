@@ -9,12 +9,18 @@
 </head>
 
 <body>
+    <header>
+        <img src="autismo - Editado.png" alt=""> 
+        <h1 class="aura">
+            AURA
+        </h1>
+    </header>
 
 <div class="container">
 
 
 <div id="home">
-<h1>🎓 WatchPad Auxiliar</h1>
+<h1>🎓 Perfis</h1>
 <p class="sub">Sistema de envio inteligente para alunos</p>
 
 <div class="menu">
@@ -25,9 +31,15 @@
 <p>Acompanhe seu filho</p>
 </div>
 
+<div class="card" onclick="abrirLoginmediador()">
+👨‍🏫
+<h3>Mediador(a)</h3>
+<p>Acompanhe seu aluno</p>
+</div>
+
 <div class="card" onclick="abrirLoginAluno()">
 👦
-<h3>Aluno</h3>
+<h3>Aluno(a)</h3>
 <p>Mensagens e localização</p>
 </div>
 
@@ -45,6 +57,15 @@
 <button onclick="voltar()">Voltar</button>
 </div>
 
+<div id="loginmediador" class="hidden">
+<h2>Entrar como Mediador</h2>
+
+<input placeholder="Email">
+<input type="password" placeholder="Senha">
+
+<button onclick="painelmediador()">Entrar</button>
+<button onclick="voltar()">Voltar</button>
+</div>
 
 <div id="loginAluno" class="hidden">
 <h2>Entrar como Aluno</h2>
@@ -113,7 +134,248 @@
 
 <button onclick="logout()">Sair</button>
 
+
 </div>
+
+</div>
+<div id="mediador" class="hidden">
+    <div id="configuracoesMediador" class="hidden">
+
+<h2>⚙ Configurações do Perfil</h2>
+
+<div class="box">
+
+<h3>👤 Informações Pessoais</h3>
+
+<input type="text"
+placeholder="Alterar nome">
+
+<input type="email"
+placeholder="Alterar email">
+
+<input type="tel"
+placeholder="Alterar telefone">
+
+<input type="password"
+placeholder="Nova senha">
+
+<button>
+💾 Salvar Alterações
+</button>
+
+</div>
+
+
+<div class="box">
+
+<h3>🔔 Notificações</h3>
+
+<label>
+<input type="checkbox">
+Receber mensagens urgentes
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox">
+Receber alertas de localização
+</label>
+
+<br><br>
+
+<label>
+<input type="checkbox">
+Receber relatórios diários
+</label>
+
+</div>
+
+
+<div class="box">
+
+<h3>🎨 Aparência</h3>
+
+<button>
+🌙 Modo Escuro
+</button>
+
+<button>
+🔤 Fonte Acessível
+</button>
+
+<button>
+🎵 Sons de Notificação
+</button>
+
+</div>
+
+
+<div class="box">
+
+<h3>🔒 Segurança</h3>
+
+<button>
+📱 Ativar autenticação em 2 etapas
+</button>
+
+<br><br>
+
+<button style="background:#e74c3c;">
+🚪 Sair da Conta
+</button>
+
+</div>
+
+<button onclick="voltarPainelMediador()">
+⬅ Voltar ao Painel
+</button>
+
+</div>
+
+<h2>👨‍🏫 Painel do Mediador</h2>
+
+<!-- ALUNO -->
+
+<div class="box">
+
+<h3>🎓 Aluno Acompanhado</h3>
+
+<div class="perfil-aluno">
+
+<img src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png" width="80">
+
+<div>
+<h3>Lucas Oliveira</h3>
+<p>10 anos • Turma 5º A</p>
+<p>Status: ✅ Na escola</p>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- LOCALIZAÇÃO -->
+
+<div class="box">
+
+<h3>📍 Localização do Aluno</h3>
+
+<div class="map">
+📌 Escola Municipal Aurora
+<br><br>
+🕒 Atualizado há 2 minutos
+</div>
+
+</div>
+
+
+<!-- MENSAGENS RÁPIDAS -->
+
+<div class="box">
+
+<h3>💬 Mensagens Rápidas do Aluno</h3>
+
+<div class="chat" id="chatAluno">
+
+<div class="msg aluno">
+😔 "Estou triste"
+</div>
+
+<div class="msg aluno">
+💧 "Quero água"
+</div>
+
+<div class="msg urgente">
+🚨 "Preciso de ajuda"
+</div>
+
+</div>
+
+<input id="respostaMediador"
+placeholder="Responder ao aluno...">
+
+<button onclick="responderAluno()">
+Enviar resposta
+</button>
+
+</div>
+
+
+<!-- CHAT COM OS PAIS -->
+
+<div class="box">
+
+<h3>👨‍👩‍👧 Chat com os Pais</h3>
+
+<div class="chat" id="chatPaisMediador">
+
+<div class="msg">
+👩 Mãe:
+Lucas dormiu bem hoje.
+</div>
+
+<div class="msg">
+👨 Mediador:
+Obrigado pelo aviso ❤️
+</div>
+
+</div>
+
+<input id="msgPaisMediador"
+placeholder="Digite uma mensagem">
+
+<button onclick="enviarMsgPaisMediador()">
+Enviar
+</button>
+
+</div>
+
+
+<!-- HISTÓRICO -->
+
+<div class="box">
+
+<h3>📚 Histórico do Aluno</h3>
+
+<div class="historico">
+
+<div class="evento sucesso">
+✅ Completou atividade de matemática
+<span>08:15</span>
+</div>
+
+<div class="evento sucesso">
+✅ Participou da roda de leitura
+<span>09:20</span>
+</div>
+
+<div class="evento alerta">
+⚠ Ficou agitado durante o recreio
+<span>10:05</span>
+</div>
+
+<div class="evento urgente">
+🚨 Pedido urgente enviado
+<span>10:12</span>
+</div>
+
+</div>
+
+</div
+<div class="box">
+
+<h3>⚙ Perfil do Mediador</h3>
+
+<p>
+Gerencie suas informações pessoais
+e preferências da conta.
+</p>
+
+<button onclick="abrirConfiguracoes()">
+⚙ Abrir Configurações
+</button>
 
 </div>
 
