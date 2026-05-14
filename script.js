@@ -2,6 +2,10 @@ function abrirLoginPais(){
     document.getElementById("home").classList.add("hidden")
     document.getElementById("loginPais").classList.remove("hidden")
 }
+function abrirLoginmediador(){
+    document.getElementById("home").classList.add("hidden")
+    document.getElementById("loginmediador").classList.remove("hidden")
+}
 
 function abrirLoginAluno(){
     document.getElementById("home").classList.add("hidden")
@@ -11,12 +15,18 @@ function abrirLoginAluno(){
 function voltar(){
     document.getElementById("loginPais").classList.add("hidden")
     document.getElementById("loginAluno").classList.add("hidden")
+    document.getElementById("loginmediador").classList.add("hidden")
     document.getElementById("home").classList.remove("hidden")
 }
 
 function painelPais(){
     document.getElementById("loginPais").classList.add("hidden")
     document.getElementById("pais").classList.remove("hidden")
+}
+
+function painelmediador(){
+    document.getElementById("loginmediador").classList.add("hidden")
+    document.getElementById("mediador").classList.remove("hidden")
 }
 
 function painelAluno(){
@@ -83,6 +93,7 @@ function gravarVideo(){
     }
 
     mediaRecorder.start()
+       alert("🎥 Gravando vídeo...");
 }
 
 function pararGravacao(){
@@ -93,7 +104,7 @@ function pararGravacao(){
     }
 
     mediaRecorder.stop()
-
+  alert("✅ Vídeo salvo!");
     mediaRecorder.onstop = () => {
 
         let blob = new Blob(chunks,{type:"video/webm"})
@@ -105,4 +116,87 @@ function pararGravacao(){
 
         alert("Vídeo enviado para o aluno!")
     }
+}
+function responderAluno(){
+
+    let input =
+    document.getElementById("respostaMediador");
+
+    let chat =
+    document.getElementById("chatAluno");
+
+    if(input.value.trim() !== ""){
+
+        let novaMsg =
+        document.createElement("div");
+
+        novaMsg.classList.add("msg");
+
+        novaMsg.innerHTML =
+        "👨‍🏫 Mediador: " + input.value;
+
+        chat.appendChild(novaMsg);
+
+        input.value = "";
+    }
+}
+
+
+function enviarMsgPaisMediador(){
+
+    let input =
+    document.getElementById("msgPaisMediador");
+
+    let chat =
+    document.getElementById("chatPaisMediador");
+
+    if(input.value.trim() !== ""){
+
+        let novaMsg =
+        document.createElement("div");
+
+        novaMsg.classList.add("msg");
+
+        novaMsg.innerHTML =
+        "👨‍🏫 Mediador: " + input.value;
+
+        chat.appendChild(novaMsg);
+
+        input.value = "";
+    }
+}
+function abrirConfiguracoes(){
+
+    esconderTudo();
+
+    document
+    .getElementById("configuracoesMediador")
+    .classList.remove("hidden");
+    document
+.getElementById("configuracoesMediador")
+.classList.add("hidden");
+}
+
+
+function voltarPainelMediador(){
+
+    esconderTudo();
+
+    document
+    .getElementById("mediador")
+    .classList.remove("hidden");
+}
+function esconderTudo() {
+
+    document.getElementById("home").classList.add("hidden");
+    document.getElementById("loginPais").classList.add("hidden");
+    document.getElementById("loginmediador").classList.add("hidden");
+    document.getElementById("loginAluno").classList.add("hidden");
+    document.getElementById("pais").classList.add("hidden");
+    document.getElementById("aluno").classList.add("hidden");
+    document.getElementById("mediador").classList.add("hidden");
+
+    document
+    .getElementById("configuracoesMediador")
+    .classList.add("hidden");
 }
