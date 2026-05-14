@@ -1,7 +1,7 @@
 body{
     font-family: Arial;
     margin:0;
-    background:linear-gradient(135deg,#5a3cff,#ff2fb2);
+    background:linear-gradient(135deg,#e2f0f1,rgb(98, 200, 218),#045b70 );
     height:100vh;
     display:flex;
     align-items:center;
@@ -15,6 +15,7 @@ body{
     border-radius:20px;
     padding:30px;
     box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
     }
     
     h1{
@@ -105,7 +106,7 @@ body{
     .action-btn{
     padding:12px;
     border-radius:10px;
-    background:linear-gradient(90deg,#6b63ff,#d43cff);
+    background:linear-gradient(90deg,#8dd0e4,#52a9c4,rgb(9, 133, 155));
     color:white;
     border:none;
     }
@@ -118,3 +119,87 @@ body{
         margin-top:10px;
         
         }
+     img{
+top: 60px;
+position: absolute;
+left: 48%;
+transform: translateX(-50%);
+width: 320px;
+        }
+      .aura  {
+top: 60px;
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+width: 320px;
+font-family: italic;
+font-size: 50px;
+        }
+        .box{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+.perfil-aluno{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.chat{
+    background:#f5f7ff;
+    padding:10px;
+    border-radius:10px;
+    max-height:200px;
+    overflow-y:auto;
+    margin-bottom:10px;
+}
+
+.msg{
+    background:white;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+.aluno{
+    background:#dfe8ff;
+}
+
+.urgente{
+    background:#ffd6d6;
+    color:#b00000;
+    font-weight:bold;
+}
+
+.historico{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.evento{
+    padding:12px;
+    border-radius:10px;
+    background:#f4f4f4;
+}
+
+.sucesso{
+    border-left:5px solid #2ecc71;
+}
+
+.alerta{
+    border-left:5px solid #f39c12;
+}
+
+.urgente{
+    border-left:5px solid #e74c3c;
+}
+
+.evento span{
+    float:right;
+    opacity:0.7;
+}
