@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>WatchPad Auxiliar</title>
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="aura.css">
 
 </head>
 
@@ -44,342 +44,326 @@
 </div>
 
 </div>
+  <div class="page-actions">
+    <button class="btn-secondary" onclick="abrirAcessibilidade()">Acessibilidade</button>
+  </div>
 </div>
 
-
 <div id="loginPais" class="hidden">
-<h2>Entrar como Pais</h2>
+  <h2 class="page-title">Entrar como Pais</h2>
+  <p class="sub">Acesse o painel para acompanhar o dia do seu filho.</p>
 
-<input placeholder="Email">
-<input type="password" placeholder="Senha">
+  <div class="form-group">
+    <input placeholder="Email">
+  </div>
+  <div class="form-group">
+    <input type="password" placeholder="Senha">
+  </div>
 
-<button onclick="painelPais()">Entrar</button>
-<button onclick="voltar()">Voltar</button>
+  <div class="page-actions">
+    <button onclick="painelPais()">Entrar</button>
+    <button class="btn-secondary" onclick="abrirCadastroPais()">Cadastrar</button>
+    <button class="btn-secondary" onclick="voltar()">Voltar</button>
+  </div>
 </div>
 
 <div id="loginmediador" class="hidden">
-<h2>Entrar como Mediador</h2>
+  <h2 class="page-title">Entrar como Mediador</h2>
+  <p class="sub">Acesse o painel do mediador para acompanhar o aluno e a família.</p>
 
-<input placeholder="Email">
-<input type="password" placeholder="Senha">
+  <div class="form-group">
+    <input placeholder="Email">
+  </div>
+  <div class="form-group">
+    <input type="password" placeholder="Senha">
+  </div>
 
-<button onclick="painelmediador()">Entrar</button>
-<button onclick="voltar()">Voltar</button>
+  <div class="page-actions">
+    <button onclick="painelmediador()">Entrar</button>
+    <button class="btn-secondary" onclick="abrirCadastroMediador()">Cadastrar</button>
+    <button class="btn-secondary" onclick="voltar()">Voltar</button>
+  </div>
 </div>
 
 <div id="loginAluno" class="hidden">
-<h2>Entrar como Aluno</h2>
+  <h2 class="page-title">Entrar como Aluno</h2>
+  <p class="sub">Acesse sua área para ver mensagens e localização.</p>
 
-<input placeholder="Usuário">
-<input type="password" placeholder="Senha">
+  <div class="form-group">
+    <input placeholder="Usuário">
+  </div>
+  <div class="form-group">
+    <input type="password" placeholder="Senha">
+  </div>
 
-<button onclick="painelAluno()">Entrar</button>
-<button onclick="voltar()">Voltar</button>
+  <div class="page-actions">
+    <button onclick="painelAluno()">Entrar</button>
+    <button class="btn-secondary" onclick="voltar()">Voltar</button>
+  </div>
 </div>
 
+<div id="acessibilidade" class="hidden">
+  <h2 class="page-title">Acessibilidade</h2>
+  <p class="sub">Aumente a letra e escolha um tema que facilite a leitura.</p>
+
+  <div class="box">
+    <h3>Tamanho da letra</h3>
+    <div class="page-actions">
+      <button onclick="setFontSize('small')">Pequena</button>
+      <button onclick="setFontSize('medium')">Média</button>
+      <button onclick="setFontSize('large')">Grande</button>
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>Tema</h3>
+    <div class="page-actions">
+      <button onclick="setTheme('light')">Claro</button>
+      <button onclick="setTheme('dark')">Escuro</button>
+    </div>
+  </div>
+
+  <div class="page-actions">
+    <button class="btn-secondary" onclick="voltar()">Voltar</button>
+  </div>
+</div>
+
+<div id="registroPais" class="hidden">
+  <h2 class="page-title">Cadastro dos Pais</h2>
+  <p class="sub">Informe seus dados e crie uma senha para acessar o sistema.</p>
+
+  <div class="form-group">
+    <input id="cadNomePai" placeholder="Nome completo">
+  </div>
+  <div class="form-group">
+    <input id="cadCpfPai" placeholder="CPF">
+  </div>
+  <div class="form-group">
+    <input id="cadEmailPai" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <input id="cadSenhaPai" type="password" placeholder="Senha">
+  </div>
+  <div class="form-group">
+    <input id="cadAlunoPai" placeholder="Nome do aluno">
+  </div>
+  <div class="form-group">
+    <input id="cadTurmaPai" placeholder="Turma do aluno">
+  </div>
+
+  <div class="page-actions">
+    <button onclick="registrarPai()">Cadastrar</button>
+    <button class="btn-secondary" onclick="voltar()">Voltar</button>
+  </div>
+</div>
+
+<div id="registroMediador" class="hidden">
+  <h2 class="page-title">Cadastro do Mediador</h2>
+  <p class="sub">Informe seus dados e crie uma conta para acessar o painel.</p>
+
+  <div class="form-group">
+    <input id="cadNomeMediador" placeholder="Nome completo">
+  </div>
+  <div class="form-group">
+    <input id="cadCpfMediador" placeholder="CPF">
+  </div>
+  <div class="form-group">
+    <input id="cadEmailMediador" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <input id="cadIdEscola" placeholder="ID da escola">
+  </div>
+  <div class="form-group">
+    <input id="cadSenhaMediador" type="password" placeholder="Criar senha">
+  </div>
+
+  <div class="page-actions">
+    <button onclick="registrarMediador()">Cadastrar</button>
+    <button class="btn-secondary" onclick="voltar()">Voltar</button>
+  </div>
+</div>
 
 <div id="pais" class="hidden">
+  <h2 class="page-title">Painel dos Pais</h2>
+  <p class="sub">Envie vídeos, acompanhe localização e converse com os professores.</p>
 
-<h2>Painel dos Pais</h2>
+  <div class="box">
+    <h3>Localização do Aluno</h3>
+    <div class="map">📍 Lucas está na escola</div>
+  </div>
 
-<h3>Localização do Aluno</h3>
-<div class="map">📍 Lucas está na escola</div>
+  <div class="box">
+    <h3>Enviar vídeo para o aluno</h3>
+    <video id="camera" autoplay muted></video>
+    <div class="page-actions">
+      <button onclick="iniciarCamera()">Abrir Câmera</button>
+      <button onclick="gravarVideo()">Gravar</button>
+      <button onclick="pararGravacao()">Parar</button>
+    </div>
+    <video id="preview" controls></video>
+  </div>
 
-<h3>Enviar vídeo para o aluno</h3>
-
-<video id="camera" autoplay muted></video>
-<br>
-
-<button onclick="iniciarCamera()">Abrir Câmera</button>
-<button onclick="gravarVideo()">Gravar</button>
-<button onclick="pararGravacao()">Parar</button>
-
-<br><br>
-
-<video id="preview" controls></video>
-
-<h3>Chat com Professores</h3>
-
-<div class="chat" id="chatPais">
-<div class="msg">Professora: Lucas teve um ótimo dia!</div>
-</div>
-
-<input id="msgPais" placeholder="Digite mensagem">
-<button onclick="enviarMsgPais()">Enviar</button>
-
-<button onclick="logout()">Sair</button>
-
+  <div class="box">
+    <h3>Chat com Professores</h3>
+    <div class="chat" id="chatPais">
+      <div class="msg">Professora: Lucas teve um ótimo dia!</div>
+    </div>
+    <div class="form-group">
+      <input id="msgPais" placeholder="Digite mensagem">
+    </div>
+    <div class="page-actions">
+      <button onclick="enviarMsgPais()">Enviar</button>
+      <button class="btn-secondary" onclick="logout()">Sair</button>
+    </div>
+  </div>
 </div>
 
 <div id="aluno" class="hidden">
+  <h2 class="page-title">Olá Lucas 👋</h2>
+  <p class="sub">Veja onde está e compartilhe como se sente.</p>
 
-<h2>Olá Lucas 👋</h2>
+  <div class="box">
+    <h3>Onde você está</h3>
+    <div class="map">📍 Escola Municipal</div>
+  </div>
 
-<h3>Onde você está</h3>
-<div class="map">📍 Escola Municipal</div>
+  <div class="box">
+    <h3>Mensagem dos Pais</h3>
+    <video id="videoAluno" controls></video>
+  </div>
 
-<h3>Mensagem dos Pais</h3>
-<video id="videoAluno" controls style="width:100%; border-radius:10px;"></video>
+  <div class="box">
+    <h3>Comunicação Rápida</h3>
+    <div class="actions">
+      <button class="action-btn">😊 Estou bem</button>
+      <button class="action-btn">🚨 Preciso de ajuda</button>
+      <button class="action-btn">💧 Quero água</button>
+      <button class="action-btn">😔 Estou triste</button>
+    </div>
+  </div>
 
-<div class="map">🎥 Vídeo enviado pelos pais</div>
-
-<h3>Comunicação</h3>
-
-<div class="actions">
-<button class="action-btn">😊 Estou bem</button>
-<button class="action-btn">🚨 Preciso de ajuda</button>
-<button class="action-btn">💧 Quero água</button>
-<button class="action-btn">😔 Estou triste</button>
+  <div class="page-actions">
+    <button class="btn-secondary" onclick="logout()">Sair</button>
+  </div>
 </div>
 
-<button onclick="logout()">Sair</button>
-
-
-</div>
-
-</div>
 <div id="mediador" class="hidden">
-    <div id="configuracoesMediador" class="hidden">
+  <div id="configuracoesMediador" class="hidden">
+    <h2 class="page-title">⚙ Configurações do Perfil</h2>
+    <p class="sub">Ajuste suas informações, notificações e opções de segurança.</p>
 
-<h2>⚙ Configurações do Perfil</h2>
+    <div class="box">
+      <h3>👤 Informações Pessoais</h3>
+      <div class="form-group">
+        <input type="text" placeholder="Alterar nome">
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder="Alterar email">
+      </div>
+      <div class="form-group">
+        <input type="tel" placeholder="Alterar telefone">
+      </div>
+      <div class="form-group">
+        <input type="password" placeholder="Nova senha">
+      </div>
+    </div>
 
-<div class="box">
+    <div class="box">
+      <h3>🔔 Notificações</h3>
+      <label><input type="checkbox"> Receber mensagens urgentes</label>
+      <label><input type="checkbox"> Receber alertas de localização</label>
+      <label><input type="checkbox"> Receber relatórios diários</label>
+    </div>
 
-<h3>👤 Informações Pessoais</h3>
+    <div class="box">
+      <h3>🎨 Aparência</h3>
+      <div class="page-actions">
+        <button>🌙 Modo Escuro</button>
+        <button>🔤 Fonte Acessível</button>
+        <button>🎵 Sons de Notificação</button>
+      </div>
+    </div>
 
-<input type="text"
-placeholder="Alterar nome">
+    <div class="box">
+      <h3>🔒 Segurança</h3>
+      <div class="page-actions">
+        <button>📱 Ativar autenticação em 2 etapas</button>
+        <button class="btn-secondary">🚪 Sair da Conta</button>
+      </div>
+    </div>
 
-<input type="email"
-placeholder="Alterar email">
+    <div class="page-actions">
+      <button class="btn-secondary" onclick="voltarPainelMediador()">⬅ Voltar ao Painel</button>
+    </div>
+  </div>
 
-<input type="tel"
-placeholder="Alterar telefone">
+  <div id="mediadorMain">
+    <h2 class="page-title">👨‍🏫 Painel do Mediador</h2>
+    <p class="sub">Gerencie o aluno, responda mensagens e acompanhe o histórico com clareza.</p>
 
-<input type="password"
-placeholder="Nova senha">
+    <div class="box">
+      <h3>🎓 Aluno Acompanhado</h3>
+      <div class="perfil-aluno">
+        <img src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png" width="80">
+        <div>
+          <h3>Lucas Oliveira</h3>
+          <p>10 anos • Turma 5º A</p>
+          <p>Status: ✅ Na escola</p>
+        </div>
+      </div>
+    </div>
 
-<button>
-💾 Salvar Alterações
-</button>
+    <div class="box">
+      <h3>📍 Localização do Aluno</h3>
+      <div class="map">📌 Escola Municipal Aurora<br><br>🕒 Atualizado há 2 minutos</div>
+    </div>
 
+    <div class="box">
+      <h3>💬 Mensagens Rápidas do Aluno</h3>
+      <div class="chat" id="chatAluno">
+        <div class="msg aluno">😔 "Estou triste"</div>
+        <div class="msg aluno">💧 "Quero água"</div>
+        <div class="msg urgent">🚨 "Preciso de ajuda"</div>
+      </div>
+      <div class="form-group">
+        <input id="respostaMediador" placeholder="Responder ao aluno...">
+      </div>
+      <button onclick="responderAluno()">Enviar resposta</button>
+    </div>
+
+    <div class="box">
+      <h3>👨‍👩‍👧 Chat com os Pais</h3>
+      <div class="chat" id="chatPaisMediador">
+        <div class="msg">👩 Mãe: Lucas dormiu bem hoje.</div>
+        <div class="msg">👨 Mediador: Obrigado pelo aviso ❤️</div>
+      </div>
+      <div class="form-group">
+        <input id="msgPaisMediador" placeholder="Digite uma mensagem">
+      </div>
+      <button onclick="enviarMsgPaisMediador()">Enviar</button>
+    </div>
+
+    <div class="box">
+      <h3>📚 Histórico do Aluno</h3>
+      <div class="historico">
+        <div class="evento sucesso">✅ Completou atividade de matemática<span>08:15</span></div>
+        <div class="evento sucesso">✅ Participou da roda de leitura<span>09:20</span></div>
+        <div class="evento alerta">⚠ Ficou agitado durante o recreio<span>10:05</span></div>
+        <div class="evento urgente">🚨 Pedido urgente enviado<span>10:12</span></div>
+      </div>
+    </div>
+
+    <div class="box">
+      <h3>⚙ Perfil do Mediador</h3>
+      <p>Gerencie suas informações pessoais e preferências da conta.</p>
+      <div class="page-actions">
+        <button onclick="abrirConfiguracoes()">⚙ Abrir Configurações</button>
+        <button class="btn-secondary" onclick="logout()">Sair</button>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-<div class="box">
-
-<h3>🔔 Notificações</h3>
-
-<label>
-<input type="checkbox">
-Receber mensagens urgentes
-</label>
-
-<br><br>
-
-<label>
-<input type="checkbox">
-Receber alertas de localização
-</label>
-
-<br><br>
-
-<label>
-<input type="checkbox">
-Receber relatórios diários
-</label>
-
-</div>
-
-
-<div class="box">
-
-<h3>🎨 Aparência</h3>
-
-<button>
-🌙 Modo Escuro
-</button>
-
-<button>
-🔤 Fonte Acessível
-</button>
-
-<button>
-🎵 Sons de Notificação
-</button>
-
-</div>
-
-
-<div class="box">
-
-<h3>🔒 Segurança</h3>
-
-<button>
-📱 Ativar autenticação em 2 etapas
-</button>
-
-<br><br>
-
-<button style="background:#e74c3c;">
-🚪 Sair da Conta
-</button>
-
-</div>
-
-<button onclick="voltarPainelMediador()">
-⬅ Voltar ao Painel
-</button>
-
-</div>
-
-<h2>👨‍🏫 Painel do Mediador</h2>
-
-<!-- ALUNO -->
-
-<div class="box">
-
-<h3>🎓 Aluno Acompanhado</h3>
-
-<div class="perfil-aluno">
-
-<img src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png" width="80">
-
-<div>
-<h3>Lucas Oliveira</h3>
-<p>10 anos • Turma 5º A</p>
-<p>Status: ✅ Na escola</p>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- LOCALIZAÇÃO -->
-
-<div class="box">
-
-<h3>📍 Localização do Aluno</h3>
-
-<div class="map">
-📌 Escola Municipal Aurora
-<br><br>
-🕒 Atualizado há 2 minutos
-</div>
-
-</div>
-
-
-<!-- MENSAGENS RÁPIDAS -->
-
-<div class="box">
-
-<h3>💬 Mensagens Rápidas do Aluno</h3>
-
-<div class="chat" id="chatAluno">
-
-<div class="msg aluno">
-😔 "Estou triste"
-</div>
-
-<div class="msg aluno">
-💧 "Quero água"
-</div>
-
-<div class="msg urgente">
-🚨 "Preciso de ajuda"
-</div>
-
-</div>
-
-<input id="respostaMediador"
-placeholder="Responder ao aluno...">
-
-<button onclick="responderAluno()">
-Enviar resposta
-</button>
-
-</div>
-
-
-<!-- CHAT COM OS PAIS -->
-
-<div class="box">
-
-<h3>👨‍👩‍👧 Chat com os Pais</h3>
-
-<div class="chat" id="chatPaisMediador">
-
-<div class="msg">
-👩 Mãe:
-Lucas dormiu bem hoje.
-</div>
-
-<div class="msg">
-👨 Mediador:
-Obrigado pelo aviso ❤️
-</div>
-
-</div>
-
-<input id="msgPaisMediador"
-placeholder="Digite uma mensagem">
-
-<button onclick="enviarMsgPaisMediador()">
-Enviar
-</button>
-
-</div>
-
-
-<!-- HISTÓRICO -->
-
-<div class="box">
-
-<h3>📚 Histórico do Aluno</h3>
-
-<div class="historico">
-
-<div class="evento sucesso">
-✅ Completou atividade de matemática
-<span>08:15</span>
-</div>
-
-<div class="evento sucesso">
-✅ Participou da roda de leitura
-<span>09:20</span>
-</div>
-
-<div class="evento alerta">
-⚠ Ficou agitado durante o recreio
-<span>10:05</span>
-</div>
-
-<div class="evento urgente">
-🚨 Pedido urgente enviado
-<span>10:12</span>
-</div>
-
-</div>
-
-</div
-<div class="box">
-
-<h3>⚙ Perfil do Mediador</h3>
-
-<p>
-Gerencie suas informações pessoais
-e preferências da conta.
-</p>
-
-<button onclick="abrirConfiguracoes()">
-⚙ Abrir Configurações
-</button>
-
-</div>
-
-<script src="script.js"></script>
+<script src="aura.js"></script>
 
 </body>
 </html>
