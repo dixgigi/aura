@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <title>WatchPad Auxiliar</title>
 
-<link rel="stylesheet" href="aura.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
     <header>
-        <img src="autismo - Editado.png" alt=""> 
+        <img src="aura.png" alt=""> 
         <h1 class="aura">
             AURA
         </h1>
@@ -49,7 +49,7 @@
   </div>
 </div>
 
-<div id="loginPais" class="hidden">
+<div id="loginPais" class="hidden login-panel">
   <h2 class="page-title">Entrar como Pais</h2>
   <p class="sub">Acesse o painel para acompanhar o dia do seu filho.</p>
 
@@ -60,14 +60,14 @@
     <input type="password" placeholder="Senha">
   </div>
 
-  <div class="page-actions">
+  <div class="page-actions vertical-actions">
     <button onclick="painelPais()">Entrar</button>
     <button class="btn-secondary" onclick="abrirCadastroPais()">Cadastrar</button>
     <button class="btn-secondary" onclick="voltar()">Voltar</button>
   </div>
 </div>
 
-<div id="loginmediador" class="hidden">
+<div id="loginmediador" class="hidden login-panel">
   <h2 class="page-title">Entrar como Mediador</h2>
   <p class="sub">Acesse o painel do mediador para acompanhar o aluno e a família.</p>
 
@@ -78,14 +78,14 @@
     <input type="password" placeholder="Senha">
   </div>
 
-  <div class="page-actions">
+  <div class="page-actions vertical-actions">
     <button onclick="painelmediador()">Entrar</button>
     <button class="btn-secondary" onclick="abrirCadastroMediador()">Cadastrar</button>
     <button class="btn-secondary" onclick="voltar()">Voltar</button>
   </div>
 </div>
 
-<div id="loginAluno" class="hidden">
+<div id="loginAluno" class="hidden login-panel">
   <h2 class="page-title">Entrar como Aluno</h2>
   <p class="sub">Acesse sua área para ver mensagens e localização.</p>
 
@@ -96,7 +96,7 @@
     <input type="password" placeholder="Senha">
   </div>
 
-  <div class="page-actions">
+  <div class="page-actions vertical-actions">
     <button onclick="painelAluno()">Entrar</button>
     <button class="btn-secondary" onclick="voltar()">Voltar</button>
   </div>
@@ -146,6 +146,15 @@
   </div>
   <div class="form-group">
     <input id="cadAlunoPai" placeholder="Nome do aluno">
+  </div>
+  <div class="form-group">
+    <label for="cadGeneroAluno">Gênero do aluno</label>
+    <select id="cadGeneroAluno">
+      <option value="">Selecione</option>
+      <option value="masculino">Masculino</option>
+      <option value="feminino">Feminino</option>
+      <option value="outro">Outro / Prefiro não dizer</option>
+    </select>
   </div>
   <div class="form-group">
     <input id="cadTurmaPai" placeholder="Turma do aluno">
@@ -218,13 +227,15 @@
   </div>
 </div>
 
-<div id="aluno" class="hidden">
-  <h2 class="page-title">Olá Lucas 👋</h2>
-  <p class="sub">Veja onde está e compartilhe como se sente.</p>
+<div id="aluno" class="hidden aluno-page">
+  <div class="aluno-hero" id="alunoHero">
+    <h2 class="page-title" id="alunoTitle">Olá Lucas 👋</h2>
+    <p class="sub" id="alunoSubtitle">Seu espaço tranquilo para saber onde está e contar como se sente.</p>
+  </div>
 
   <div class="box">
     <h3>Onde você está</h3>
-    <div class="map">📍 Escola Municipal</div>
+    <div class="map" id="alunoLocation">📍 Escola Municipal</div>
   </div>
 
   <div class="box">
@@ -233,12 +244,28 @@
   </div>
 
   <div class="box">
+    <h3>Coisas que ajudam hoje</h3>
+    <div class="sticker-grid">
+      <div class="sticker-card masculino" id="sticker1"><span>🎧</span>Música calma</div>
+      <div class="sticker-card masculino" id="sticker2"><span>☕</span>Intervalo tranquilo</div>
+      <div class="sticker-card masculino" id="sticker3"><span>📚</span>História favorita</div>
+      <div class="sticker-card masculino" id="sticker4"><span>🌈</span>Atividade sensorial</div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>Configurações da Página</h3>
+    <p>Escolha um tema de fundo com desenhos e cores especiais para você.</p>
+    <div id="alunoThemeOptions" class="theme-options"></div>
+  </div>
+
+  <div class="box">
     <h3>Comunicação Rápida</h3>
     <div class="actions">
-      <button class="action-btn">😊 Estou bem</button>
-      <button class="action-btn">🚨 Preciso de ajuda</button>
-      <button class="action-btn">💧 Quero água</button>
-      <button class="action-btn">😔 Estou triste</button>
+      <button class="action-btn" onclick="enviarMensagemAluno('😊 Estou bem')">😊 Estou bem</button>
+      <button class="action-btn" onclick="enviarMensagemAluno('🚨 Preciso de ajuda')">🚨 Preciso de ajuda</button>
+      <button class="action-btn" onclick="enviarMensagemAluno('💧 Quero água')">💧 Quero água</button>
+      <button class="action-btn" onclick="enviarMensagemAluno('😔 Estou triste')">😔 Estou triste</button>
     </div>
   </div>
 
@@ -248,7 +275,7 @@
 </div>
 
 <div id="mediador" class="hidden">
-  <div id="configuracoesMediador" class="hidden">
+    <div id="configuracoesMediador" class="hidden">
     <h2 class="page-title">⚙ Configurações do Perfil</h2>
     <p class="sub">Ajuste suas informações, notificações e opções de segurança.</p>
 
@@ -266,6 +293,7 @@
       <div class="form-group">
         <input type="password" placeholder="Nova senha">
       </div>
+      <button onclick="salvarConfiguracoesMediador()">💾 Salvar Alterações</button>
     </div>
 
     <div class="box">
@@ -288,7 +316,7 @@
       <h3>🔒 Segurança</h3>
       <div class="page-actions">
         <button>📱 Ativar autenticação em 2 etapas</button>
-        <button class="btn-secondary">🚪 Sair da Conta</button>
+        <button class="btn-secondary" onclick="logout()">🚪 Sair da Conta</button>
       </div>
     </div>
 
@@ -363,7 +391,7 @@
     </div>
   </div>
 </div>
-<script src="aura.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
