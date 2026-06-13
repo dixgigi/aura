@@ -1,15 +1,18 @@
 function abrirLoginPais(){
     esconderTudo();
     document.getElementById("loginPais").classList.remove("hidden")
+    document.querySelector('.container').classList.add('sem-caixa');
 }
 function abrirLoginmediador(){
     esconderTudo();
     document.getElementById("loginmediador").classList.remove("hidden")
+    document.querySelector('.container').classList.add('sem-caixa');
 }
 
 function abrirLoginAluno(){
     esconderTudo();
     document.getElementById("loginAluno").classList.remove("hidden")
+    document.querySelector('.container').classList.add('sem-caixa');
 }
 
 function abrirAcessibilidade(){
@@ -20,20 +23,24 @@ function abrirAcessibilidade(){
 function abrirCadastroPais(){
     esconderTudo();
     document.getElementById("registroPais").classList.remove("hidden")
+    document.querySelector('.container').classList.remove('sem-caixa');
 }
 
 function abrirCadastroMediador(){
     esconderTudo();
     document.getElementById("registroMediador").classList.remove("hidden")
+    document.querySelector('.container').classList.remove('sem-caixa');
 }
 
 function voltar(){
     esconderTudo();
     document.querySelector('header').style.display = 'flex';
     document.getElementById("home").classList.remove("hidden")
+    document.querySelector('.container').classList.remove('sem-caixa');
 }
 
 function painelPais(){
+   
     const email = document.querySelector('#loginPais input[placeholder="Email"]').value.trim();
     const password = document.querySelector('#loginPais input[type="password"]').value.trim();
     const paisDB = JSON.parse(localStorage.getItem('auraPaisDB') || '[]');
@@ -43,7 +50,7 @@ function painelPais(){
         alert('Email ou senha incorretos. Cadastre-se ou tente novamente.');
         return;
     }
-
+    document.querySelector('.container').classList.remove('sem-caixa');
     esconderTudo();
     localStorage.setItem('auraUserAtual', JSON.stringify({tipo: 'pai', email: email}));
     carregarChatPais();
@@ -51,6 +58,7 @@ function painelPais(){
 }
 
 function painelmediador(){
+    
     const email = document.querySelector('#loginmediador input[placeholder="Email"]').value.trim();
     const password = document.querySelector('#loginmediador input[type="password"]').value.trim();
     const medDB = JSON.parse(localStorage.getItem('auraMediadorDB') || '[]');
@@ -60,7 +68,7 @@ function painelmediador(){
         alert('Email ou senha incorretos. Cadastre-se ou tente novamente.');
         return;
     }
-
+    document.querySelector('.container').classList.remove('sem-caixa');
     esconderTudo();
     localStorage.setItem('auraUserAtual', JSON.stringify({tipo: 'mediador', email: email, nome: user.nome}));
     carregarChatMediador();
@@ -69,7 +77,7 @@ function painelmediador(){
 
 function painelAluno(){
     esconderTudo();
-
+    document.querySelector('.container').classList.remove('sem-caixa');
     const studentName = localStorage.getItem("auraAlunoNome") || "Lucas";
     const studentGender = localStorage.getItem("auraAlunoGenero") || "neutro";
 
