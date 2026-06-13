@@ -38,7 +38,9 @@ header img{
     margin:0;
     text-shadow:0 4px 10px rgba(0,0,0,0.2);
 }
-
+#home{
+     text-align:center;
+}
 .container{
     width:92%;
     max-width:960px;
@@ -48,7 +50,12 @@ header img{
     box-shadow:0 10px 30px rgba(0,0,0,0.2);
     position: relative;
 }
-
+.container.sem-caixa {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    max-width: 100%;
+}
 .page-title{
     font-size:1.8rem;
     margin:0 0 8px;
@@ -114,6 +121,7 @@ button:hover{
 
 .btn-secondary{
     background:#8aa6b4;
+    font-weight: bold;
 }
 
 .btn-secondary:hover{
@@ -121,7 +129,7 @@ button:hover{
 }
 
 input{
-    width:100%;
+    width:96%;
     padding:12px 14px;
     margin-top:10px;
     border-radius:10px;
