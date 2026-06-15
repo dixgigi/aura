@@ -72,7 +72,14 @@ function painelmediador(){
     esconderTudo();
     localStorage.setItem('auraUserAtual', JSON.stringify({tipo: 'mediador', email: email, nome: user.nome}));
     carregarChatMediador();
+    const notificacao = localStorage.getItem("notificacaoUrgente");
+    if (notificacao) {
+        alert(notificacao);
+        localStorage.removeItem("notificacaoUrgente");
+    }
     document.getElementById("mediador").classList.remove("hidden")
+    monitorarNotificacoesMediador();
+  
 }
 
 function painelAluno(){
@@ -137,21 +144,21 @@ function populateAlunoThemeOptions(layout){
 
     if(layout === "masculino"){
         options = [
-            { id: "carros", label: "🚗 Carros" },
-            { id: "aranha", label: "🕷️ Homem-Aranha" },
-            { id: "espaco", label: "🚀 Espaço" }
+            { id: "carros", label: "🔵 Azul" },
+            { id: "aranha", label: "🔴 Vermelho" },
+            { id: "flores", label: "🟢 Verde" },
         ];
     } else if(layout === "feminino"){
         options = [
-            { id: "borboletas", label: "🦋 Borboletas" },
-            { id: "flores", label: "🌸 Flores" },
-            { id: "unicornios", label: "🦄 Unicórnios" }
+            { id: "borboletas", label: "🌸 Rosa" },
+            { id: "espaco", label: "🟣 Roxo" },
+            { id: "unicornios", label: "💜 Lilás" },
         ];
     } else {
         options = [
-            { id: "neutro", label: "🌟 Tema neutro" },
-            { id: "arcoiris", label: "🌈 Arco-íris" },
-            { id: "estrelas", label: "✨ Estrelas" }
+            { id: "neutro", label: "⚪ Cinza" },
+            { id: "arcoiris", label: "🩵 Azul Claro" },
+            { id: "estrelas", label: "🟠 Dourado" }
         ];
     }
 
@@ -163,14 +170,49 @@ function populateAlunoThemeOptions(layout){
     setAlunoBodyTheme(savedTheme);
 }
 
-function setAlunoBodyTheme(theme){
+function setAlunoBodyTheme(theme) {
     const aluno = document.getElementById("aluno");
-    const allThemes = ["aluno-theme-carros","aluno-theme-aranha","aluno-theme-espaco","aluno-theme-borboletas","aluno-theme-flores","aluno-theme-unicornios","aluno-theme-neutro","aluno-theme-arcoiris","aluno-theme-estrelas"];
-    if(!aluno) return;
-    // cleanup previous theme classes from #aluno
-    aluno.classList.remove(...allThemes);
-    // apply chosen theme only to the aluno container
-    aluno.classList.add(`aluno-theme-${theme}`);
+    if (!aluno) return;
+
+    switch (theme) {
+        case "carros":
+            aluno.style.background = "#dbeafe"; // azul claro
+            break;
+
+        case "aranha":
+            aluno.style.background = "#fecaca"; // vermelho claro
+            break;
+
+        case "espaco":
+            aluno.style.background = "#c7d2fe"; // roxo azulado
+           
+            break;
+
+        case "borboletas":
+            aluno.style.background = "#fbcfe8"; // rosa claro
+            break;
+
+        case "flores":
+            aluno.style.background = "#78ff69"; // verde claro
+            break;
+
+        case "unicornios":
+            aluno.style.background = "#e9d5ff"; // lilás
+            break;
+
+        case "neutro":
+            aluno.style.background = "#e5e7eb"; // cinza claro
+            break;
+
+        case "arcoiris":
+            aluno.style.background = "#bfdbfe"; // azul bebê
+            break;
+
+        case "estrelas":
+            aluno.style.background = "#fef3c7"; // dourado claro
+            break;
+    }
+
     localStorage.setItem("auraAlunoBodyTheme", theme);
 }
 
@@ -194,14 +236,25 @@ function carregarChatPais(){
     chat.scrollTop = chat.scrollHeight;
 }
 
-function enviarMensagemAluno(mensagem){
-    // Armazenar a mensagem do aluno
+function enviarMensagemAluno(mensagem) {
+
     let chats = JSON.parse(localStorage.getItem('auraChats') || '{}');
     if (!chats.alunoMediador) chats.alunoMediador = [];
-    chats.alunoMediador.push({tipo: 'aluno', mensagem: mensagem, timestamp: new Date().toLocaleTimeString()});
+    chats.alunoMediador.push({
+        tipo: 'aluno',
+        mensagem: mensagem
+    });
     localStorage.setItem('auraChats', JSON.stringify(chats));
-    
-    alert('Mensagem enviada: ' + mensagem);
+    if (mensagem.includes("ajuda")) {
+
+        let mediadores = JSON.parse(localStorage.getItem('auraMediadorDB') || '[]');
+        mediadores.forEach(mediador => {
+            if (mediador.notificacoes?.urgentes) {
+                localStorage.setItem("notificacaoUrgente","🚨 O aluno pediu ajuda!");
+            }
+        });
+
+    }
 }
 
 function carregarChatMediador(){
@@ -243,35 +296,109 @@ function carregarChatMediador(){
     chatPaisMed.scrollTop = chatPaisMed.scrollHeight;
 }
 
-function salvarConfiguracoesMediador(){
+function salvarConfiguracoesMediador() {
     let nome = document.querySelector('#configuracoesMediador input[placeholder="Alterar nome"]').value.trim();
     let email = document.querySelector('#configuracoesMediador input[placeholder="Alterar email"]').value.trim();
-    let telefone = document.querySelector('#configuracoesMediador input[placeholder="Alterar telefone"]').value.trim();
+    let idEscola = document.querySelector('#configuracoesMediador input[placeholder="Alterar ID da Escola"]').value.trim();
     let novaSenha = document.querySelector('#configuracoesMediador input[placeholder="Nova senha"]').value.trim();
 
-    if(!nome && !email && !telefone && !novaSenha){
-        alert('Preencha pelo menos um campo para atualizar.');
+    let userAtual = JSON.parse(
+        localStorage.getItem('auraUserAtual') || '{}'
+    );
+
+    let mediadores = JSON.parse(
+        localStorage.getItem('auraMediadorDB') || '[]'
+    );
+
+    let index = mediadores.findIndex(
+        u => u.email === userAtual.email
+    );
+
+    if (index === -1) {
+        alert('Mediador não encontrado.');
         return;
     }
 
+    if (nome) mediadores[index].nome = nome;
+    if (email) mediadores[index].email = email;
+    if (idEscola) mediadores[index].idEscola = idEscola;
+    if (novaSenha) mediadores[index].password = novaSenha;
+
+
+    localStorage.setItem(
+        'auraMediadorDB',
+        JSON.stringify(mediadores)
+    );
+
+    localStorage.setItem(
+        'auraUserAtual',
+        JSON.stringify({
+            tipo: 'mediador',
+            email: mediadores[index].email,
+            nome: mediadores[index].nome
+        })
+    );
+
+    alert('Configurações atualizadas com sucesso!');
+    voltarPainelMediador();
+}
+function salvarNotificacoes() {
+    const notifUrgentes = document.getElementById('notifUrgentes').checked;
+    const notifLocalizacao = document.getElementById('notifLocalizacao').checked;
+    const notifRelatorios = document.getElementById('notifRelatorios').checked;
+
     let userAtual = JSON.parse(localStorage.getItem('auraUserAtual') || '{}');
     let mediadores = JSON.parse(localStorage.getItem('auraMediadorDB') || '[]');
-    
-    let index = mediadores.findIndex(u => u.email === userAtual.email);
-    if(index !== -1){
-        if(nome) mediadores[index].nome = nome;
-        if(email) mediadores[index].email = email;
-        if(telefone) mediadores[index].telefone = telefone;
-        if(novaSenha) mediadores[index].password = novaSenha;
-        
-        localStorage.setItem('auraMediadorDB', JSON.stringify(mediadores));
-        localStorage.setItem('auraUserAtual', JSON.stringify({tipo: 'mediador', email: mediadores[index].email, nome: mediadores[index].nome}));
-        
-        alert('Configurações atualizadas com sucesso!');
-        voltarPainelMediador();
-    }
-}
 
+    let index = mediadores.findIndex(u => u.email === userAtual.email);
+
+    if (index === -1) {
+        alert("Mediador não encontrado");
+        return;
+    }
+
+    mediadores[index].notificacoes = {
+        urgentes: notifUrgentes,
+        localizacao: notifLocalizacao,
+        relatorios: notifRelatorios
+    };
+
+    localStorage.setItem('auraMediadorDB', JSON.stringify(mediadores));
+
+    alert("🔔 Notificações salvas com sucesso!");
+}
+function carregarConfiguracoesMediador() {
+
+    let userAtual =
+        JSON.parse(localStorage.getItem('auraUserAtual') || '{}');
+
+    let mediadores =
+        JSON.parse(localStorage.getItem('auraMediadorDB') || '[]');
+
+    let mediador =
+        mediadores.find(u => u.email === userAtual.email);
+
+    if (!mediador || !mediador.notificacoes) return;
+
+    document.getElementById('notifUrgentes').checked =
+        mediador.notificacoes.urgentes || false;
+
+    document.getElementById('notifLocalizacao').checked =
+        mediador.notificacoes.localizacao || false;
+
+    document.getElementById('notifRelatorios').checked =
+        mediador.notificacoes.relatorios || false;
+}
+function monitorarNotificacoesMediador() {
+    setInterval(() => {
+        const notificacao = localStorage.getItem("notificacaoUrgente");
+
+        if (notificacao) {
+            alert(notificacao);
+            localStorage.removeItem("notificacaoUrgente");
+        }
+    }, 2000);
+}
 function logout(){
     localStorage.removeItem('auraUserAtual');
     location.reload()
@@ -474,6 +601,7 @@ function registrarMediador(){
 function abrirConfiguracoes(){
     document.getElementById("mediadorMain").classList.add("hidden");
     document.getElementById("configuracoesMediador").classList.remove("hidden");
+    carregarConfiguracoesMediador();
 }
 
 function voltarPainelMediador(){
