@@ -290,7 +290,7 @@
         <input type="email" placeholder="Alterar email">
       </div>
       <div class="form-group">
-        <input type="tel" placeholder="Alterar telefone">
+        <input type="text" placeholder="Alterar ID da Escola">
       </div>
       <div class="form-group">
         <input type="password" placeholder="Nova senha">
@@ -300,9 +300,11 @@
 
     <div class="box">
       <h3>🔔 Notificações</h3>
-      <label><input type="checkbox"> Receber mensagens urgentes</label>
-      <label><input type="checkbox"> Receber alertas de localização</label>
-      <label><input type="checkbox"> Receber relatórios diários</label>
+      <label><input type="checkbox" id="notifUrgentes"> Receber mensagens urgentes</label>
+      <label><input type="checkbox" id="notifLocalizacao"> Receber alertas de localização</label>
+      <label><input type="checkbox" id="notifRelatorios"> Receber relatórios diários</label>
+      <br><br>
+      <button onclick="salvarNotificacoes()">💾 Salvar Notificações</button>
     </div>
 
     <div class="box">
