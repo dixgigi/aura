@@ -275,70 +275,7 @@ select{
     background:#e8f6ff;
 }
 
-/* Theme backgrounds with small repeated SVG icons */
-.aluno-page.aluno-theme-carros{
-    background: linear-gradient(180deg, #d4efff, #c1dcff);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><rect x='6' y='18' width='36' height='12' rx='3' fill='%23006ea6'/><circle cx='16' cy='36' r='4' fill='%23000000'/><circle cx='32' cy='36' r='4' fill='%23000000'/></svg>");
-    background-repeat: repeat;
-    background-size: 72px 72px;
-}
 
-.aluno-page.aluno-theme-aranha{
-    background: linear-gradient(180deg, #e2f0ff, #d2dbff);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><circle cx='24' cy='18' r='8' fill='%230e2f6b'/><line x1='8' y1='6' x2='40' y2='42' stroke='%230e2f6b' stroke-width='2'/></svg>");
-    background-repeat: repeat;
-    background-size: 72px 72px;
-}
-
-.aluno-page.aluno-theme-espaco{
-    background: linear-gradient(180deg, #1b2f54, #2d4275);
-    color:#f8fbff;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><circle cx='36' cy='12' r='6' fill='%23ffd166'/><path d='M10 36 L22 20 L34 36 Z' fill='%23f7c948'/></svg>");
-    background-repeat: repeat;
-    background-size: 84px 84px;
-}
-
-.aluno-page.aluno-theme-borboletas{
-    background: linear-gradient(180deg, #ffe7f7, #f7e0ff);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><path d='M24 16 C20 8,12 8,12 16 C12 24,24 30,24 30 C24 30,36 24,36 16 C36 8,28 8,24 16 Z' fill='%23ff9bd6'/></svg>");
-    background-repeat: repeat;
-    background-size: 64px 64px;
-}
-
-.aluno-page.aluno-theme-flores{
-    background: linear-gradient(180deg, #fff1f5, #ffe1f0);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><circle cx='24' cy='20' r='4' fill='%23ff8fb1'/><path d='M24 8 L24 16 M16 20 L8 20 M32 20 L40 20 M18 12 L12 8 M30 12 L36 8' stroke='%23ff8fb1' stroke-width='2' stroke-linecap='round'/></svg>");
-    background-repeat: repeat;
-    background-size: 64px 64px;
-}
-
-.aluno-page.aluno-theme-unicornios{
-    background: linear-gradient(180deg, #f9f0ff, #ffe9fb);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><path d='M12 30 C16 18,32 18,36 30 C32 28,28 26,24 26 C20 26,16 28,12 30 Z' fill='%23fff1f9'/><path d='M18 14 L22 6 L26 14' stroke='%23f28fe8' stroke-width='2' stroke-linecap='round' fill='none'/></svg>");
-    background-repeat: repeat;
-    background-size: 84px 84px;
-}
-
-.aluno-page.aluno-theme-neutro{
-    background: linear-gradient(180deg, #f5f7f8, #eef3f6);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><circle cx='10' cy='10' r='3' fill='%23d6e9ef'/><circle cx='38' cy='38' r='3' fill='%23d6e9ef'/></svg>");
-    background-repeat: repeat;
-    background-size: 72px 72px;
-}
-
-.aluno-page.aluno-theme-arcoiris{
-    background: linear-gradient(180deg, #f7f3ff, #e4f5ff);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><path d='M6 30 A18 18 0 0 1 42 30' stroke='%23ff6b6b' stroke-width='3' fill='none'/></svg>");
-    background-repeat: repeat;
-    background-size: 96px 96px;
-}
-
-.aluno-page.aluno-theme-estrelas{
-    background: radial-gradient(circle at top center, #ffffff 0%, #dfefff 20%, #c7e2f2 100%);
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><polygon points='24,6 28,18 40,18 30,24 34,36 24,28 14,36 18,24 8,18 20,18' fill='%23ffd166'/></svg>");
-    background-repeat: repeat;
-    background-size: 72px 72px;
-}
 
 /* html theme rules removed to keep themes scoped to .aluno-page only */
 
