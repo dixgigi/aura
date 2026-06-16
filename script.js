@@ -57,29 +57,70 @@ function painelPais(){
     document.getElementById("pais").classList.remove("hidden")
 }
 
-function painelmediador(){
-    
+function painelmediador() {
+
     const email = document.querySelector('#loginmediador input[placeholder="Email"]').value.trim();
     const password = document.querySelector('#loginmediador input[type="password"]').value.trim();
+
     const medDB = JSON.parse(localStorage.getItem('auraMediadorDB') || '[]');
-    const user = medDB.find(u => u.email === email && u.password === password);
+
+    const user = medDB.find(
+        u => u.email === email && u.password === password
+    );
 
     if (!user) {
         alert('Email ou senha incorretos. Cadastre-se ou tente novamente.');
         return;
     }
-    document.querySelector('.container').classList.remove('sem-caixa');
-    esconderTudo();
-    localStorage.setItem('auraUserAtual', JSON.stringify({tipo: 'mediador', email: email, nome: user.nome}));
-    carregarChatMediador();
-    const notificacao = localStorage.getItem("notificacaoUrgente");
-    if (notificacao) {
-        alert(notificacao);
-        localStorage.removeItem("notificacaoUrgente");
+
+   
+    if (user.doisFatores) {
+
+        const codigo = gerarCodigo2FA();
+
+        localStorage.setItem("codigo2FA", codigo);
+
+        localStorage.setItem(
+            "codigo2FAExpira",
+            Date.now() + (5 * 60 * 1000)
+        );
+
+        localStorage.setItem(
+            "loginPendente",
+            JSON.stringify({
+                tipo: 'mediador',
+                email: email,
+                nome: user.nome
+            })
+        );
+
+        enviarCodigoEmail(user.email, codigo);
+
+        mostrarTela2FA();
+
+        return;
     }
-    document.getElementById("mediador").classList.remove("hidden")
+
+    
+    document.querySelector('.container').classList.remove('sem-caixa');
+
+    esconderTudo();
+
+    localStorage.setItem(
+        'auraUserAtual',
+        JSON.stringify({
+            tipo: 'mediador',
+            email: email,
+            nome: user.nome
+        })
+    );
+
+    carregarChatMediador();
+
+
+    document.getElementById("mediador").classList.remove("hidden");
+
     monitorarNotificacoesMediador();
-  
 }
 
 function painelAluno(){
@@ -390,14 +431,237 @@ function carregarConfiguracoesMediador() {
         mediador.notificacoes.relatorios || false;
 }
 function monitorarNotificacoesMediador() {
+
     setInterval(() => {
+
         const notificacao = localStorage.getItem("notificacaoUrgente");
 
+        console.log("Monitorando:", notificacao);
+
         if (notificacao) {
-            alert(notificacao);
-            localStorage.removeItem("notificacaoUrgente");
+
+            const som = localStorage.getItem("somNotificacao") || "padrao";
+
+            tocarSom(som);
+
+            setTimeout(() => {
+                alert(notificacao);
+                localStorage.removeItem("notificacaoUrgente");
+            }, 500);
+
         }
-    }, 2000);
+
+    }, 1000);
+
+}
+function verificar2FA() {
+
+    const codigoDigitado = document.getElementById("input2fa").value.trim();
+    const codigoSalvo = localStorage.getItem("codigo2FA");
+    const expiracao =Number(localStorage.getItem("codigo2FAExpira"));
+    if (Date.now() > expiracao) {
+
+        localStorage.removeItem("codigo2FA");
+        localStorage.removeItem("codigo2FAExpira");
+
+        alert("⏰ Código expirado. Solicite um novo código.");
+
+        return;
+    }
+    if (codigoDigitado !== codigoSalvo) {
+        alert("Código incorreto!");
+        return;
+    }
+
+    const loginPendente =JSON.parse(localStorage.getItem("loginPendente"));
+
+    localStorage.setItem("auraUserAtual",JSON.stringify(loginPendente));
+    localStorage.removeItem("codigo2FA");
+    localStorage.removeItem("loginPendente");
+
+    document.querySelector('.container').classList.remove('sem-caixa');
+    esconderTudo();
+    carregarChatMediador();
+
+    const notificacao = localStorage.getItem("notificacaoUrgente");
+
+
+    document.getElementById("mediador").classList.remove("hidden");
+    monitorarNotificacoesMediador();
+}
+function gerarCodigo2FA() {
+    return Math.floor(
+        100000 + Math.random() * 900000
+    ).toString();
+}
+function reenviarCodigo2FA() {
+
+    const loginPendente =
+        JSON.parse(
+            localStorage.getItem("loginPendente") || "{}"
+        );
+
+    if (!loginPendente.email) {
+        alert("Sessão inválida.");
+        return;
+    }
+
+    const codigo = gerarCodigo2FA();
+
+    localStorage.setItem(
+        "codigo2FA",
+        codigo
+    );
+
+    localStorage.setItem(
+        "codigo2FAExpira",
+        Date.now() + (5 * 60 * 1000)
+    );
+
+    enviarCodigoEmail(
+        loginPendente.email,
+        codigo
+    );
+
+    alert("✅ Novo código enviado!");
+}
+function enviarCodigoEmail(email, codigo) {
+
+    emailjs.send(
+        "service_bdd54vr",
+        "template_ud3wy08",
+        {
+            passcode: codigo,
+            email: email
+        }
+    )
+        .then(() => {
+            alert("📧 Código enviado para o email!");
+        })
+        .catch((erro) => {
+            console.error("Erro EmailJS:", erro);
+            alert("❌ Erro ao enviar o código.");
+        });
+
+}
+function toggle2FA() {
+
+    let userAtual = JSON.parse(
+        localStorage.getItem('auraUserAtual') || '{}'
+    );
+
+    let mediadores = JSON.parse(
+        localStorage.getItem('auraMediadorDB') || '[]'
+    );
+
+    let index = mediadores.findIndex(
+        u => u.email === userAtual.email
+    );
+
+    if (index === -1) {
+        alert("Mediador não encontrado.");
+        return;
+    }
+
+    mediadores[index].doisFatores =
+        !mediadores[index].doisFatores;
+
+    localStorage.setItem(
+        'auraMediadorDB',
+        JSON.stringify(mediadores)
+    );
+
+    alert(
+        mediadores[index].doisFatores
+            ? "✅ Autenticação em 2 etapas ativada!"
+            : "❌ Autenticação em 2 etapas desativada!"
+    );
+}
+function voltarLoginMediador() {
+
+    document.getElementById("input2fa").value = "";
+
+    localStorage.removeItem("codigo2FA");
+    localStorage.removeItem("codigo2FAExpira");
+    localStorage.removeItem("loginPendente");
+
+    esconderTudo();
+
+    document.querySelector('.container').classList.add('sem-caixa');
+    document.getElementById("loginmediador").classList.remove("hidden");
+    localStorage.removeItem("codigo2FAExpira");
+}
+function mostrarTela2FA() {
+    esconderTudo();
+    document
+        .getElementById("tela2fa")
+        .classList
+        .remove("hidden");
+}
+function testarSom() {
+
+    const somSelecionado =
+        document.getElementById("somNotificacao").value;
+
+    tocarSom(somSelecionado);
+
+}
+function tocarSom(tipo) {
+
+    let audio;
+
+    switch (tipo) {
+
+        case "suave":
+            audio = new Audio("sons/suave.mpeg");
+            break;
+
+        case "urgente":
+            audio = new Audio("sons/urgente.mpeg");
+            break;
+
+        default:
+            audio = new Audio("sons/padrao.mpeg");
+    }
+
+    audio.play();
+
+}
+function salvarSom() {
+
+    const som =
+        document.getElementById("somNotificacao").value;
+
+    localStorage.setItem(
+        "somNotificacao",
+        som
+    );
+
+    alert("Som salvo!");
+
+}
+function mostrarNotificacaoUrgente(msg) {
+
+    const som =
+        localStorage.getItem("somNotificacao")
+        || "padrao";
+
+    tocarSom(som);
+
+    alert(msg);
+
+}
+function tocarSomUrgente() {
+    const audio = new Audio("sons/urgente.mpeg");
+    audio.play();
+}
+function tocarSomPadrao() {
+    const audio = new Audio("sons/padrao.mpeg");
+    audio.play();
+}
+function tocarSomSuave() {
+    const audio = new Audio("sons/suave.mpeg");
+    audio.play();
 }
 function logout(){
     localStorage.removeItem('auraUserAtual');
@@ -592,7 +856,7 @@ function registrarMediador(){
         return;
     }
 
-    mediadores.push({ nome, cpf, email, idEscola, password });
+    mediadores.push({ nome, cpf, email, idEscola, password, doisFatores: false });
     localStorage.setItem('auraMediadorDB', JSON.stringify(mediadores));
     alert('Cadastro de mediador realizado com sucesso! Agora faça login.');
     voltar();
@@ -622,7 +886,7 @@ function esconderTudo() {
     document.getElementById("pais").classList.add("hidden");
     document.getElementById("aluno").classList.add("hidden");
     document.getElementById("mediador").classList.add("hidden");
-
+    document.getElementById("tela2fa").classList.add("hidden");
     document
     .getElementById("configuracoesMediador")
     .classList.add("hidden");
