@@ -103,7 +103,19 @@
     <button class="btn-secondary" onclick="voltar()">Voltar</button>
   </div>
 </div>
+<div id="tela2fa" class="hidden">
+  <div class="box">
+    <h3>🔐 Verificação em 2 etapas</h3>
 
+    <p>Digite o código enviado para seu email.</p>
+    <p id="mensagem2fa">Um código de verificação foi enviado para seu email.</p>
+    <input id="input2fa" type="text" placeholder="Digite o código">
+
+    <button onclick="verificar2FA()">Confirmar</button>
+    <button onclick="reenviarCodigo2FA()">🔄 Reenviar Código</button>
+    <button class="btn-secondary" onclick="voltarLoginMediador()">⬅ Voltar</button>
+  </div>
+</div>
 <div id="acessibilidade" class="hidden">
   <h2 class="page-title">Acessibilidade</h2>
   <p class="sub">Aumente a letra e escolha um tema que facilite a leitura.</p>
@@ -307,17 +319,25 @@
       <button onclick="salvarNotificacoes()">💾 Salvar Notificações</button>
     </div>
 
-    <div class="box">
-      <h3>🔊 Sons</h3>
-      <div class="page-actions">
-        <button>🎵 Sons de Notificação</button>
-      </div>
-    </div>
+  <div class="box">
+    <h3>🔊 Sons</h3>
+  
+    <select id="somNotificacao">
+      <option value="padrao">🔔 Padrão</option>
+      <option value="suave">🎵 Suave</option>
+      <option value="urgente">🚨 Urgente</option>
+    </select>
+  
+    <br><br>
+  
+    <button onclick="testarSom()">▶ Testar Som</button>
+    <button onclick="salvarSom()">💾 Salvar Som</button>
+  </div>
 
     <div class="box">
       <h3>🔒 Segurança</h3>
       <div class="page-actions">
-        <button>📱 Ativar autenticação em 2 etapas</button>
+        <button onclick="toggle2FA()">📱 Ativar autenticação em 2 etapas</button>
         <button class="btn-secondary" onclick="logout()">🚪 Sair da Conta</button>
       </div>
     </div>
@@ -393,6 +413,14 @@
     </div>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+  emailjs.init({
+    publicKey: "IQWuJmZuiv3ZullEm",
+  });
+</script>
+
 <script src="script.js"></script>
 
 </body>
