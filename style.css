@@ -491,3 +491,435 @@ video{
     float:right;
     opacity:0.7;
 }
+
+/* Media Queries para Celular */
+@media (max-width: 768px) {
+    body {
+        padding: 60px 0 20px;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 10px;
+        margin: 10px 0 15px;
+    }
+
+    header img {
+        width: 100px;
+        max-width: 120px;
+    }
+
+    .aura {
+        font-size: 32px;
+    }
+
+    .container {
+        width: 95%;
+        padding: 18px 16px;
+        border-radius: 18px;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .menu {
+        gap: 12px;
+        margin-top: 15px;
+    }
+
+    .card {
+        min-width: 140px;
+        padding: 14px;
+        border-radius: 14px;
+    }
+
+    .card h3 {
+        font-size: 1rem;
+        margin: 10px 0 4px;
+    }
+
+    .card p {
+        font-size: 0.85rem;
+    }
+
+    button {
+        padding: 12px 14px;
+        font-size: 15px;
+        border-radius: 10px;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px 12px;
+        margin-top: 8px;
+        font-size: 16px;
+    }
+
+    .login-panel {
+        max-width: 100%;
+        padding: 20px 16px;
+        margin: 0 10px;
+    }
+
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .page-actions {
+        gap: 8px;
+    }
+
+    .page-actions.vertical-actions button {
+        width: 100%;
+        padding: 12px 14px;
+    }
+
+    label {
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+    }
+
+    .chat {
+        max-height: 200px;
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+
+    .msg {
+        padding: 10px 12px;
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+    }
+
+    .map {
+        min-height: 100px;
+        font-size: 16px;
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+
+    .box {
+        padding: 16px;
+        margin-bottom: 15px;
+        border-radius: 16px;
+    }
+
+    .box h3 {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+
+    .actions {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .action-btn {
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 0.95rem;
+    }
+
+    video {
+        max-height: 200px;
+        margin-top: 8px;
+    }
+
+    .aluno-page {
+        padding: 16px;
+    }
+
+    .aluno-hero {
+        padding: 14px;
+        margin-bottom: 12px;
+    }
+
+    .aluno-hero p {
+        margin: 8px 0 0;
+        font-size: 0.9rem;
+    }
+
+    .sticker-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .sticker-card {
+        padding: 12px;
+        border-radius: 14px;
+    }
+
+    .sticker-card span {
+        font-size: 1.5rem;
+        margin-bottom: 6px;
+    }
+
+    .theme-options {
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .theme-option {
+        flex: 1 1 100%;
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        border-radius: 12px;
+    }
+
+    .perfil-aluno {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .perfil-aluno img {
+        width: 60px;
+    }
+
+    .historico {
+        gap: 10px;
+    }
+
+    .evento {
+        padding: 12px;
+        border-radius: 12px;
+        font-size: 0.95rem;
+    }
+
+    .evento span {
+        display: block;
+        float: none;
+        margin-top: 6px;
+        opacity: 0.7;
+    }
+
+    .sub {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 50px 0 15px;
+    }
+
+    header {
+        margin: 8px 0 12px;
+        gap: 8px;
+    }
+
+    header img {
+        width: 80px;
+        max-width: 100px;
+    }
+
+    .aura {
+        font-size: 26px;
+        margin: 0;
+    }
+
+    .container {
+        width: 96%;
+        padding: 14px 12px;
+    }
+
+    .page-title {
+        font-size: 1.3rem;
+        margin: 0 0 6px;
+    }
+
+    .sub {
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+    }
+
+    .menu {
+        gap: 10px;
+        flex-direction: column;
+        margin-top: 12px;
+    }
+
+    .card {
+        min-width: 100%;
+        padding: 12px;
+    }
+
+    .card h3 {
+        font-size: 0.95rem;
+        margin: 8px 0 3px;
+    }
+
+    .card p {
+        font-size: 0.8rem;
+    }
+
+    button {
+        padding: 10px 12px;
+        font-size: 14px;
+        width: 100%;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 16px;
+        margin-top: 6px;
+    }
+
+    .login-panel {
+        max-width: 100%;
+        padding: 16px 12px;
+        margin: 0 8px;
+        border-radius: 16px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .page-actions {
+        gap: 6px;
+        flex-direction: column;
+    }
+
+    .chat {
+        max-height: 180px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 12px;
+    }
+
+    .msg {
+        padding: 8px 10px;
+        margin-bottom: 6px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    .map {
+        min-height: 90px;
+        font-size: 14px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 12px;
+    }
+
+    .box {
+        padding: 12px;
+        margin-bottom: 12px;
+        border-radius: 14px;
+    }
+
+    .box h3 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .actions {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        margin-top: 10px;
+    }
+
+    .action-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    video {
+        max-height: 180px;
+        margin-top: 8px;
+        border-radius: 10px;
+    }
+
+    .aluno-page {
+        padding: 12px;
+        border-radius: 16px;
+    }
+
+    .aluno-hero {
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 14px;
+    }
+
+    .aluno-hero p {
+        margin: 6px 0 0;
+        font-size: 0.85rem;
+    }
+
+    .sticker-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    .sticker-card {
+        padding: 10px;
+        border-radius: 12px;
+        font-size: 0.9rem;
+    }
+
+    .sticker-card span {
+        font-size: 1.3rem;
+        margin-bottom: 4px;
+    }
+
+    .theme-options {
+        gap: 6px;
+        margin-top: 8px;
+        flex-direction: column;
+    }
+
+    .theme-option {
+        flex: 1 1 100%;
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    .perfil-aluno {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .perfil-aluno img {
+        width: 50px;
+    }
+
+    .perfil-aluno h3 {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    .perfil-aluno p {
+        margin: 4px 0;
+        font-size: 0.85rem;
+    }
+
+    .historico {
+        gap: 8px;
+    }
+
+    .evento {
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+    }
+
+    .evento span {
+        display: block;
+        float: none;
+        margin-top: 4px;
+        text-align: right;
+    }
+
+    label {
+        font-size: 0.85rem;
+        margin-bottom: 3px;
+    }
+}
