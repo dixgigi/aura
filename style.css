@@ -154,6 +154,7 @@ input{
 .page-actions.vertical-actions{
     flex-direction:column;
     align-items:stretch;
+
 }
 
 .page-actions.vertical-actions button{
@@ -176,6 +177,10 @@ input{
 .login-panel .page-title,
 .login-panel .sub{
     text-align:center;
+}
+
+.hidden login-panel{
+ background: black;
 }
 
 label{
@@ -371,6 +376,153 @@ body.font-small{
     font-size:14px;
 }
 
+.footer{
+    width:100%;
+    margin:0;
+    margin-top:auto;
+    padding:24px 0;
+    border-radius:0 0 20px 20px;
+    background:rgba(0, 65, 122, 0.95);
+    color:#f5f9ff;
+    text-align:center;
+    box-shadow:0 -2px 20px rgba(0,0,0,0.16);
+}
+
+.footer .footer-content{
+    width:min(100%,1200px);
+    padding:0 20px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    align-items:center;
+    justify-content:center;
+}
+
+.footer-links{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.footer-separator{
+    color:rgba(255,255,255,0.7);
+}
+
+.footer p{
+    margin:0;
+    max-width:760px;
+    line-height:1.75;
+    color:#dceeff;
+    font-size:0.98rem;
+}
+
+.footer a{
+    color:#a5d8ff;
+    text-decoration:underline;
+    font-weight:700;
+}
+
+.faq-list details{
+    background:rgba(255,255,255,0.95);
+    border:1px solid rgba(56, 135, 235, 0.18);
+    border-radius:18px;
+    margin-bottom:14px;
+    padding:0;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0, 91, 141, 0.08);
+}
+
+.faq-list summary{
+    list-style:none;
+    cursor:pointer;
+    padding:18px 20px;
+    font-size:1rem;
+    font-weight:700;
+    color:#0f3d56;
+    position:relative;
+}
+
+.faq-list summary::-webkit-details-marker{
+    display:none;
+}
+
+.faq-list details[open] summary{
+    background:rgba(9, 122, 199, 0.12);
+}
+
+.faq-list p{
+    margin:0;
+    padding:0 20px 18px;
+    color:#264870;
+    line-height:1.8;
+    font-size:0.96rem;
+}
+
+.faq-list summary::after{
+    content:'+';
+    position:absolute;
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:1.2rem;
+    color:#0f3d56;
+}
+
+.faq-list details[open] summary::after{
+    content:'−';
+}
+
+.quem-somos-page{
+    background:linear-gradient(135deg,#0f4db5,#5ab0ff,#1055a8);
+    color:#102a4b;
+}
+
+.quem-somos-page .container{
+    background:rgba(255,255,255,0.96);
+}
+
+.quem-somos-page .aura{
+    color:#ffffff;
+    text-shadow:0 4px 12px rgba(0,0,0,0.18);
+}
+
+.quem-somos-page .page-title,
+.quem-somos-page h1,
+.quem-somos-page h2{
+    font-family:'Bodoni Moda',serif;
+    color:#0a3259;
+}
+
+.quem-somos-page .intro,
+.quem-somos-page .autism-box p{
+    font-size:1rem;
+    line-height:1.8;
+    color:#264870;
+}
+
+.quem-somos-page .autism-box{
+    border:2px solid #67b8ff;
+    background:linear-gradient(180deg,rgba(128,209,255,0.16),rgba(255,255,255,0.92));
+    box-shadow:0 14px 30px rgba(51, 102, 153, 0.12);
+}
+
+.quem-somos-page .link-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+}
+
+@media (max-width: 768px) {
+    .footer{
+        margin:20px 12px 10px;
+        padding:16px;
+    }
+}
+
 body.font-medium{
     font-size:26px;
 }
@@ -444,6 +596,7 @@ video{
     border-radius:18px;
     margin-bottom:20px;
     box-shadow:0 6px 20px rgba(0,0,0,0.08);
+    
 }
 
 .perfil-aluno{
