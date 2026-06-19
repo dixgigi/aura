@@ -1266,17 +1266,17 @@ body.theme-dark #aluno[style*="background: #fbcfe8"] {
 
 body.theme-dark #aluno[style*="background: rgb(219, 234, 254)"],
 body.theme-dark #aluno[style*="background: #dbeafe"] {
-    background: #172554 !important;
+    background: #1e3a8a !important; 
 }
 
 body.theme-dark #aluno[style*="background: rgb(254, 202, 202)"],
 body.theme-dark #aluno[style*="background: #fecaca"] {
-    background: #450a0a !important;
+    background: #7f1d1d !important; 
 }
 
 body.theme-dark #aluno[style*="background: rgb(120, 255, 105)"],
 body.theme-dark #aluno[style*="background: #78ff69"] {
-    background: #022c22 !important;
+    background: #064e3b !important; 
 }
 
 
