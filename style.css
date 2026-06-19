@@ -1236,7 +1236,48 @@ body.theme-dark .home-footer .footer-links a,
 body.theme-dark .home-footer a {
     color: #38bdf8 !important; 
 } 
+body.theme-dark .theme-option,
+body.theme-dark #alunoThemeOptions button,
+body.theme-dark button.theme-option {
+    color: #ffffff !important; 
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5) !important; 
+    border: 1px solid rgba(255, 255, 255, 0.2) !important; 
+}
 
+body.theme-dark .theme-option:hover {
+    color: #ffffff !important;
+    filter: brightness(1.2) !important; 
+}
+
+body.theme-dark #aluno[style*="background: rgb(199, 210, 254)"],
+body.theme-dark #aluno[style*="background: #c7d2fe"] {
+    background: #581c87 !important; 
+}
+
+body.theme-dark #aluno[style*="background: rgb(233, 213, 255)"],
+body.theme-dark #aluno[style*="background: #e9d5ff"] {
+    background: #6b21a8 !important; 
+}
+
+body.theme-dark #aluno[style*="background: rgb(251, 207, 232)"],
+body.theme-dark #aluno[style*="background: #fbcfe8"] {
+    background: #831843 !important; 
+}
+
+body.theme-dark #aluno[style*="background: rgb(219, 234, 254)"],
+body.theme-dark #aluno[style*="background: #dbeafe"] {
+    background: #172554 !important;
+}
+
+body.theme-dark #aluno[style*="background: rgb(254, 202, 202)"],
+body.theme-dark #aluno[style*="background: #fecaca"] {
+    background: #450a0a !important;
+}
+
+body.theme-dark #aluno[style*="background: rgb(120, 255, 105)"],
+body.theme-dark #aluno[style*="background: #78ff69"] {
+    background: #022c22 !important;
+}
 
 
 
