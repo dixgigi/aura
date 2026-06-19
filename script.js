@@ -790,24 +790,33 @@ function enviarMsgPaisMediador(){
         input.value = "";
     }
 }
-function setTheme(theme){
+function setTheme(theme) {
     document.body.classList.remove("theme-light", "theme-dark");
+
     document.body.classList.add("theme-" + theme);
+
     localStorage.setItem("auraTheme", theme);
 }
 
-function setFontSize(size){
+function setFontSize(size) {
     document.body.classList.remove("font-small", "font-medium", "font-large");
     document.body.classList.add("font-" + size);
     localStorage.setItem("auraFontSize", size);
 }
 
-function loadAccessibilitySettings(){
+function loadAccessibilitySettings() {
     const savedTheme = localStorage.getItem("auraTheme") || "light";
     const savedFont = localStorage.getItem("auraFontSize") || "medium";
+    
     setTheme(savedTheme);
     setFontSize(savedFont);
 }
+
+loadAccessibilitySettings();
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadAccessibilitySettings();
+});
 
 function registrarPai(){
     const nome = document.getElementById('cadNomePai').value.trim();
