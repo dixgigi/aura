@@ -545,7 +545,6 @@ function enviarCodigoEmail(email, codigo) {
 
 }
 function toggle2FA() {
-
     let userAtual = JSON.parse(
         localStorage.getItem('auraUserAtual') || '{}'
     );
@@ -563,20 +562,60 @@ function toggle2FA() {
         return;
     }
 
-    mediadores[index].doisFatores =
-        !mediadores[index].doisFatores;
+    mediadores[index].doisFatores = !mediadores[index].doisFatores;
 
     localStorage.setItem(
         'auraMediadorDB',
         JSON.stringify(mediadores)
     );
 
+    let ativo = mediadores[index].doisFatores;
+
     alert(
-        mediadores[index].doisFatores
+        ativo
             ? "✅ Autenticação em 2 etapas ativada!"
             : "❌ Autenticação em 2 etapas desativada!"
     );
+
+    atualizarBotoes2FA(ativo);
 }
+
+function atualizarBotoes2FA(estaAtivo) {
+    
+    let btnAtivar = document.getElementById('btnAtivar2FA');
+    let btnDesativar = document.getElementById('btnDesativar2FA');
+
+    if (!btnAtivar || !btnDesativar) {
+        const botoes = document.querySelectorAll('.page-actions button');
+        botoes.forEach(btn => {
+            if (btn.textContent.includes('Ativar')) btnAtivar = btn;
+            if (btn.textContent.includes('Desativar')) btnDesativar = btn;
+        });
+    }
+
+    if (btnAtivar && btnDesativar) {
+        if (estaAtivo) {
+            btnAtivar.style.setProperty('display', 'none', 'important');
+            btnDesativar.style.setProperty('display', 'inline-block', 'important');
+        } else {
+            btnAtivar.style.setProperty('display', 'inline-block', 'important');
+            btnDesativar.style.setProperty('display', 'none', 'important');
+        }
+    }
+}
+
+function checar2FAAoCarregar() {
+    let userAtual = JSON.parse(localStorage.getItem('auraUserAtual') || '{}');
+    let mediadores = JSON.parse(localStorage.getItem('auraMediadorDB') || '[]');
+    let mediadorLogado = mediadores.find(u => u.email === userAtual.email);
+    let estadoAtual = mediadorLogado ? !!mediadorLogado.doisFatores : false;
+    
+    atualizarBotoes2FA(estadoAtual);
+}
+
+document.addEventListener("DOMContentLoaded", checar2FAAoCarregar);
+window.addEventListener("load", checar2FAAoCarregar);
+
 function voltarLoginMediador() {
 
     document.getElementById("input2fa").value = "";
