@@ -546,7 +546,6 @@ function enviarCodigoEmail(email, codigo) {
 }
 
 function toggle2FA() {
-
     let userAtual = JSON.parse(
         localStorage.getItem('auraUserAtual') || '{}'
     );
@@ -564,8 +563,7 @@ function toggle2FA() {
         return;
     }
 
-    mediadores[index].doisFatores =
-        !mediadores[index].doisFatores;
+    mediadores[index].doisFatores = !mediadores[index].doisFatores;
 
     localStorage.setItem(
         'auraMediadorDB',
@@ -575,11 +573,11 @@ function toggle2FA() {
     let ativo = mediadores[index].doisFatores;
 
     alert(
-        mediadores[index].doisFatores
+        ativo
             ? "✅ Autenticação em 2 etapas ativada!"
             : "❌ Autenticação em 2 etapas desativada!"
     );
-    
+
     atualizarBotoes2FA(ativo);
 }
 
@@ -587,25 +585,16 @@ function atualizarBotoes2FA(estaAtivo) {
     const btnAtivar = document.getElementById('btnAtivar2FA');
     const btnDesativar = document.getElementById('btnDesativar2FA');
 
-    if (estaAtivo) {
-        if (btnAtivar) btnAtivar.style.display = 'none';
-        if (btnDesativar) btnDesativar.style.display = 'inline-block';
-    } else {
-        if (btnAtivar) btnAtivar.style.display = 'inline-block';
-        if (btnDesativar) btnDesativar.style.display = 'none';
+    if (btnAtivar && btnDesativar) {
+        if (estaAtivo) {
+            btnAtivar.style.display = 'none';
+            btnDesativar.style.display = 'inline-block';
+        } else {
+            btnAtivar.style.display = 'inline-block';
+            btnDesativar.style.display = 'none';
+        }
     }
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    let userAtual = JSON.parse(localStorage.getItem('auraUserAtual') || '{}');
-    let mediadores = JSON.parse(localStorage.getItem('auraMediadorDB') || '[]');
-    
-    let mediadorLogado = mediadores.find(u => u.email === userAtual.email);
-    
-    let estadoAtual = mediadorLogado ? !!mediadorLogado.doisFatores : false;
-    
-    atualizarBotoes2FA(estadoAtual);
-});
 
 function voltarLoginMediador() {
 
