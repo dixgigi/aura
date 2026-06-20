@@ -1279,5 +1279,23 @@ body.theme-dark #aluno[style*="background: #78ff69"] {
     background: #064e3b !important; 
 }
 
+body.theme-dark #aluno[style*="background: rgb(229, 231, 235)"],
+body.theme-dark #aluno[style*="background: #e5e7eb"],
+body.theme-dark #aluno.neutro {
+    background: #475569 !important; 
+    color: #ffffff !important;      
+}
+
+body.theme-dark #aluno[style*="background: rgb(191, 219, 254)"],
+body.theme-dark #aluno[style*="background: #bfdbfe"],
+body.theme-dark #aluno.arcoiris {
+    background: #1e3a8a !important; 
+}
+
+body.theme-dark #aluno[style*="background: rgb(254, 243, 199)"],
+body.theme-dark #aluno[style*="background: #fef3c7"],
+body.theme-dark #aluno.estrelas {
+    background: #78350f !important; 
+}
 
 
