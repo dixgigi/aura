@@ -112,8 +112,8 @@
     <p id="mensagem2fa">Um código de verificação foi enviado para seu email.</p>
     <input id="input2fa" type="text" placeholder="Digite o código">
 
-    <button onclick="verificar2FA()">Confirmar</button>
-    <button onclick="reenviarCodigo2FA()">🔄 Reenviar Código</button>
+    <button class="btn-secondary" onclick="verificar2FA()">Confirmar</button>
+    <button class="btn-secondary" onclick="reenviarCodigo2FA()">🔄 Reenviar Código</button>
     <button class="btn-secondary" onclick="voltarLoginMediador()">⬅ Voltar</button>
   </div>
 </div>
@@ -308,7 +308,7 @@
       <div class="form-group">
         <input type="password" placeholder="Nova senha">
       </div>
-      <button onclick="salvarConfiguracoesMediador()">💾 Salvar Alterações</button>
+      <button class="btn-secondary" onclick="salvarConfiguracoesMediador()">💾 Salvar Alterações</button>
     </div>
 
     <div class="box">
@@ -317,7 +317,7 @@
       <label><input type="checkbox" id="notifLocalizacao"> Receber alertas de localização</label>
       <label><input type="checkbox" id="notifRelatorios"> Receber relatórios diários</label>
       <br><br>
-      <button onclick="salvarNotificacoes()">💾 Salvar Notificações</button>
+      <button class="btn-secondary" onclick="salvarNotificacoes()">💾 Salvar Notificações</button>
     </div>
 
   <div class="box">
@@ -331,15 +331,15 @@
   
     <br><br>
   
-    <button onclick="testarSom()">▶ Testar Som</button>
-    <button onclick="salvarSom()">💾 Salvar Som</button>
+    <button class="btn-secondary" onclick="testarSom()">▶ Testar Som</button>
+    <button class="btn-secondary" onclick="salvarSom()">💾 Salvar Som</button>
   </div>
 
     <div class="box">
       <h3>🔒 Segurança</h3>
       <div class="page-actions">
-        <button id="btnAtivar2FA" onclick="toggle2FA()">📱 Ativar autenticação em 2 etapas</button>
-          <button id="btnDesativar2FA" style="display: none;" onclick="toggle2FA()">🔓 Desativar autenticação em 2 etapas</button>
+        <button class="btn-secondary" id="btnAtivar2FA" onclick="toggle2FA()">📱 Ativar autenticação em 2 etapas</button>
+          <button class="btn-secondary" id="btnDesativar2FA" style="display: none;" onclick="toggle2FA()">🔓 Desativar autenticação em 2 etapas</button>
         <button class="btn-secondary" onclick="logout()">🚪 Sair da Conta</button>
       </div>
     </div>
