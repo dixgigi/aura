@@ -124,17 +124,17 @@
   <div class="box">
     <h3>Tamanho da letra</h3>
     <div class="page-actions">
-      <button onclick="setFontSize('small')">Pequena</button>
-      <button onclick="setFontSize('medium')">Média</button>
-      <button onclick="setFontSize('large')">Grande</button>
+      <button class="btn-secondary" onclick="setFontSize('small')">Pequena</button>
+      <button class="btn-secondary" onclick="setFontSize('medium')">Média</button>
+      <button class="btn-secondary" onclick="setFontSize('large')">Grande</button>
     </div>
   </div>
 
   <div class="box">
     <h3>Tema</h3>
     <div class="page-actions">
-      <button onclick="setTheme('light')">Claro</button>
-      <button onclick="setTheme('dark')">Escuro</button>
+      <button class="btn-secondary" onclick="setTheme('light')">Claro</button>
+      <button class="btn-secondary" onclick="setTheme('dark')">Escuro</button>
     </div>
   </div>
 
@@ -176,7 +176,7 @@
   </div>
 
   <div class="page-actions">
-    <button onclick="registrarPai()">Cadastrar</button>
+    <button class="btn-secondary" onclick="registrarPai()">Cadastrar</button>
     <button class="btn-secondary" onclick="voltar()">Voltar</button>
   </div>
 </div>
@@ -202,7 +202,7 @@
   </div>
 
   <div class="page-actions">
-    <button onclick="registrarMediador()">Cadastrar</button>
+    <button class="btn-secondary" onclick="registrarMediador()">Cadastrar</button>
     <button class="btn-secondary" onclick="voltar()">Voltar</button>
   </div>
 </div>
@@ -220,9 +220,9 @@
     <h3>Enviar vídeo para o aluno</h3>
     <video id="camera" autoplay muted></video>
     <div class="page-actions">
-      <button onclick="iniciarCamera()">Abrir Câmera</button>
-      <button onclick="gravarVideo()">Gravar</button>
-      <button onclick="pararGravacao()">Parar</button>
+      <button class="btn-secondary" onclick="iniciarCamera()">Abrir Câmera</button>
+      <button class="btn-secondary" onclick="gravarVideo()">Gravar</button>
+      <button class="btn-secondary" onclick="pararGravacao()">Parar</button>
     </div>
     <video id="preview" controls></video>
   </div>
@@ -236,7 +236,7 @@
       <input id="msgPais" placeholder="Digite mensagem">
     </div>
     <div class="page-actions">
-      <button onclick="enviarMsgPais()">Enviar</button>
+      <button class="btn-secondary" onclick="enviarMsgPais()">Enviar</button>
       <button class="btn-secondary" onclick="logout()">Sair</button>
     </div>
   </div>
@@ -380,7 +380,7 @@
       <div class="form-group">
         <input id="respostaMediador" placeholder="Responder ao aluno...">
       </div>
-      <button onclick="responderAluno()">Enviar resposta</button>
+      <button class="btn-secondary" onclick="responderAluno()">Enviar resposta</button>
     </div>
 
     <div class="box">
@@ -392,7 +392,7 @@
       <div class="form-group">
         <input id="msgPaisMediador" placeholder="Digite uma mensagem">
       </div>
-      <button onclick="enviarMsgPaisMediador()">Enviar</button>
+      <button class="btn-secondary" onclick="enviarMsgPaisMediador()">Enviar</button>
     </div>
 
     <div class="box">
