@@ -639,7 +639,46 @@ video{
     float:right;
     opacity:0.7;
 }
+.historico label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 14px;
+    background: #f7f9fc;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #1c2e46;
+}
 
+.historico label:has(.evento-check[value*="sucesso"]) {
+    border-left: 5px solid #2ecc71;
+}
+
+.historico label:has(.evento-check[value*="alerta"]) {
+    border-left: 5px solid #f39c12;
+}
+
+.historico label:has(.evento-check[value*="urgente"]) {
+    border-left: 5px solid #e74c3c;
+}
+
+.historico label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #045b70;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.historico label span {
+    margin-left: auto;
+    opacity: 0.7;
+    font-size: 0.85rem;
+}
 /* Media Queries para Celular */
 @media (max-width: 768px) {
     body {
