@@ -50,10 +50,21 @@ function painelPais(){
         alert('Email ou senha incorretos. Cadastre-se ou tente novamente.');
         return;
     }
+    if (user.doisFatores) {
+        const codigo = gerarCodigo2FA();
+        localStorage.setItem("codigo2FA", codigo);
+        localStorage.setItem("codigo2FAExpira",Date.now() + (5 * 60 * 1000));
+        localStorage.setItem("loginPendente",JSON.stringify({ tipo: 'pai', email: email, nome: user.nome}));
+        enviarCodigoEmail(user.email, codigo);
+        mostrarTela2FA();
+        return;
+
+    }
     document.querySelector('.container').classList.remove('sem-caixa');
     esconderTudo();
     localStorage.setItem('auraUserAtual', JSON.stringify({tipo: 'pai', email: email}));
     carregarChatPais();
+    carregarHistoricoPais();
     document.getElementById("pais").classList.remove("hidden")
 }
 
@@ -481,13 +492,15 @@ function verificar2FA() {
 
     document.querySelector('.container').classList.remove('sem-caixa');
     esconderTudo();
-    carregarChatMediador();
+    if (loginPendente.tipo === "mediador") {
+        carregarChatMediador();
+        document.getElementById("mediador").classList.remove("hidden");
+        monitorarNotificacoesMediador();
 
-    const notificacao = localStorage.getItem("notificacaoUrgente");
-
-
-    document.getElementById("mediador").classList.remove("hidden");
-    monitorarNotificacoesMediador();
+    } else if (loginPendente.tipo === "pai") {
+        carregarChatPais();
+        document.getElementById("pais").classList.remove("hidden");
+    }
 }
 function gerarCodigo2FA() {
     return Math.floor(
@@ -900,7 +913,246 @@ function voltarPainelMediador(){
     document.getElementById("configuracoesMediador").classList.add("hidden");
     document.getElementById("mediadorMain").classList.remove("hidden");
 }
+function abrirConfiguracoesPais() {
+    document.getElementById("pais").classList.add("hidden");
+    document.getElementById("configuracoesPais").classList.remove("hidden");
+    let user = JSON.parse(localStorage.getItem("auraUserAtual") || "{}");
+    let paises = JSON.parse(localStorage.getItem("auraPaisDB") || "[]");
+    let pai = paises.find(p => p.email === user.email);
+    if (pai) {
+        document.getElementById("nomePaiConfig").value = pai.nome;
+        document.getElementById("emailPaiConfig").value = pai.email;
+        document.getElementById("alunoPaiConfig").value = pai.aluno;
+        document.getElementById("turmaPaiConfig").value = pai.turma;
+    }
+}
+function salvarConfiguracoesPais() {
+    let user = JSON.parse(localStorage.getItem("auraUserAtual") || "{}");
+    let paises = JSON.parse(localStorage.getItem("auraPaisDB") || "[]");
+    
+    let index = paises.findIndex(p => p.email === user.email);
 
+    if (index === -1) {
+        alert("Pai não encontrado");
+        return;
+    }
+    let nome = document.getElementById("nomePaiConfig").value.trim();
+    let email = document.getElementById("emailPaiConfig").value.trim();
+    let senha = document.getElementById("senhaPaiConfig").value.trim();
+    let aluno = document.getElementById("alunoPaiConfig").value.trim();
+    let turma = document.getElementById("turmaPaiConfig").value.trim();
+    if (nome)paises[index].nome = nome;
+    if (email)paises[index].email = email;
+    if (senha)paises[index].password = senha;
+    if (aluno)paises[index].aluno = aluno;
+    if (turma)paises[index].turma = turma;
+    localStorage.setItem("auraPaisDB",JSON.stringify(paises));
+    localStorage.setItem("auraAlunoNome", paises[index].aluno);
+    alert("Configurações atualizadas!");
+    voltarPainelPais();
+}
+function voltarPainelPais() {
+    document.getElementById("configuracoesPais").classList.add("hidden");
+    document.getElementById("pais").classList.remove("hidden");
+}
+function toggle2FAPai(){
+
+    let userAtual = JSON.parse(
+        localStorage.getItem('auraUserAtual') || '{}'
+    );
+
+
+    let paises = JSON.parse(
+        localStorage.getItem('auraPaisDB') || '[]'
+    );
+
+
+    let index = paises.findIndex(
+        p => p.email === userAtual.email
+    );
+
+
+    if(index === -1){
+        alert("Pai não encontrado.");
+        return;
+    }
+
+
+    paises[index].doisFatores = !paises[index].doisFatores;
+
+
+    localStorage.setItem(
+        'auraPaisDB',
+        JSON.stringify(paises)
+    );
+
+
+    let ativo = paises[index].doisFatores;
+
+
+    alert(
+        ativo
+        ? "✅ Autenticação em 2 etapas ativada!"
+        : "❌ Autenticação em 2 etapas desativada!"
+    );
+
+
+    atualizarBotoes2FAPai(ativo);
+
+}
+
+
+function atualizarBotoes2FAPai(ativo){
+
+    const ativar =
+    document.getElementById("btnAtivar2FAPai");
+
+    const desativar =
+    document.getElementById("btnDesativar2FAPai");
+
+
+    if(ativar && desativar){
+
+        ativar.style.display = ativo 
+        ? "none" 
+        : "inline-block";
+
+
+        desativar.style.display = ativo
+        ? "inline-block"
+        : "none";
+
+    }
+
+}
+
+let tipoRecuperacao = "";
+function abrirRecuperarSenha(tipo) {
+
+    tipoRecuperacao = tipo;
+
+    esconderTudo();
+
+    document
+        .getElementById("recuperarSenha")
+        .classList.remove("hidden");
+
+}
+
+function recuperarSenha() {
+
+    let email = document.getElementById("emailRecuperacao").value.trim();
+
+    if (!email) {
+        alert("Digite seu email.");
+        return;
+    }
+
+    let usuario;
+
+    if (tipoRecuperacao === "pai") {
+        let pais = JSON.parse(localStorage.getItem("auraPaisDB") || "[]");
+        usuario = pais.find(p => p.email === email);
+    }
+
+    if (tipoRecuperacao === "mediador") {
+        let mediadores = JSON.parse(localStorage.getItem("auraMediadorDB") || "[]");
+        usuario = mediadores.find(m => m.email === email);
+    }
+
+    if (tipoRecuperacao === "aluno") {
+        let alunos = JSON.parse(localStorage.getItem("auraAlunoDB") || "[]");
+        usuario = alunos.find(a => a.email === email);
+    }
+
+    if (!usuario) {
+        alert("Email não encontrado.");
+        return;
+    }
+
+    let novaSenha = Math.floor(100000 + Math.random() * 900000).toString();
+
+
+    usuario.password = novaSenha;
+
+
+    if (tipoRecuperacao === "pai") {
+
+        let pais = JSON.parse(localStorage.getItem("auraPaisDB"));
+        let index = pais.findIndex(p => p.email === email);
+        pais[index] = usuario;
+
+        localStorage.setItem("auraPaisDB",JSON.stringify(pais));
+
+    }
+
+    if (tipoRecuperacao === "mediador") {
+        let mediadores = JSON.parse(localStorage.getItem("auraMediadorDB"));
+        let index = mediadores.findIndex(m => m.email === email);
+
+        mediadores[index] = usuario;
+
+        localStorage.setItem("auraMediadorDB",JSON.stringify(mediadores));
+    }
+
+    enviarNovaSenha(email, novaSenha);
+    alert("Nova senha enviada para seu email!");
+    voltar();
+}
+
+function enviarNovaSenha(email, senha) {
+    emailjs.send(
+        "service_bdd54vr",
+        "template_ud3wy08",
+        {
+            email: email,
+            passcode: senha
+        }
+    )
+        .then(() => {
+            console.log("Senha enviada");
+        })
+        .catch(erro => {
+            console.log(erro);
+        });
+}
+function enviarHistoricoParaPais() {
+    const checks = document.querySelectorAll('.evento-check:checked');
+    if (checks.length === 0) {
+        alert('Selecione pelo menos um evento.');
+        return;
+    }
+
+    let historico = JSON.parse(localStorage.getItem('auraHistoricoPais') || '[]');
+
+    checks.forEach(check => {
+        const [texto, hora, tipo] = check.value.split(' | ');
+        historico.push({ texto, hora, tipo, enviadoEm: new Date().toLocaleString() });
+        check.checked = false;
+    });
+
+    localStorage.setItem('auraHistoricoPais', JSON.stringify(historico));
+    alert('✅ Histórico enviado para os pais!');
+}
+
+function carregarHistoricoPais() {
+    const container = document.getElementById('historicoPais');
+    if (!container) return;
+
+    const historico = JSON.parse(localStorage.getItem('auraHistoricoPais') || '[]');
+
+    if (historico.length === 0) {
+        container.innerHTML = '<p style="color:#aaa">Nenhum evento recebido ainda.</p>';
+        return;
+    }
+
+    container.innerHTML = historico.map(ev => `
+    <div class="evento ${ev.tipo}">
+      ${ev.texto}
+      <span>${ev.hora}</span>
+    </div>
+  `).join('');
+}
 function esconderTudo() {
     document.querySelector('header').style.display = 'none';
 
@@ -915,9 +1167,8 @@ function esconderTudo() {
     document.getElementById("aluno").classList.add("hidden");
     document.getElementById("mediador").classList.add("hidden");
     document.getElementById("tela2fa").classList.add("hidden");
-    document
-    .getElementById("configuracoesMediador")
-    .classList.add("hidden");
+    document.getElementById("configuracoesMediador").classList.add("hidden");
+    document.getElementById("recuperarSenha").classList.add("hidden");
 }
 
 loadAccessibilitySettings();
