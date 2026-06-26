@@ -90,10 +90,13 @@
 
   <div class="page-actions vertical-actions">
     <button class="btn-secondary" onclick="painelPais()">Entrar</button>
+    <button class="btn-secondary" onclick="abrirRecuperarSenha('pai')">Esqueci minha senha</button>
     <button class="btn-secondary" onclick="abrirCadastroPais()">Cadastrar</button>
     <button class="btn-secondary" onclick="voltar()">Voltar</button>
   </div>
 </div>
+
+
 
 <div id="loginmediador" class="hidden login-panel">
   <h2 class="page-title">Entrar como Mediador</h2>
@@ -108,60 +111,11 @@
 
   <div class="page-actions vertical-actions">
     <button  class="btn-secondary" onclick="painelmediador()">Entrar</button>
+    <button class="btn-secondary" onclick="abrirRecuperarSenha('mediador')">Esqueci minha senha</button>
     <button class="btn-secondary" onclick="abrirCadastroMediador()">Cadastrar</button>
     <button class="btn-secondary" onclick="voltar()">Voltar</button>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -178,9 +132,58 @@
 
   <div class="page-actions vertical-actions">
     <button class="btn-secondary" onclick="painelAluno()">Entrar</button>
+    <button class="btn-secondary" onclick="abrirRecuperarSenha('aluno')">Esqueci minha senha</button>
     <button class="btn-secondary" onclick="voltar()">Voltar</button>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+<div id="recuperarSenha" class="hidden">
+
+  <h2>🔑 Recuperar senha</h2>
+
+  <p>Digite seu email cadastrado:</p>
+
+  <input id="emailRecuperacao" placeholder="Email">
+
+
+  <button class="btn-secondary" onclick="recuperarSenha()">
+    Enviar nova senha
+  </button>
+
+
+  <button class="btn-secondary" onclick="voltar()">
+    Voltar
+  </button>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div id="tela2fa" class="hidden">
   <div class="box">
     <h3>🔐 Verificação em 2 etapas</h3>
@@ -446,7 +449,27 @@
     </div>
     <div class="page-actions">
       <button class="btn-secondary" onclick="enviarMsgPais()">Enviar</button>
-      <button class="btn-secondary" onclick="logout()">Sair</button>
+    </div>
+  </div>
+  <div class="box">
+    <h3>📚 Histórico do Aluno</h3>
+    <p class="sub" style="text-align:left">Eventos enviados pelo mediador:</p>
+    <div class="historico" id="historicoPais">
+      <p style="color:#aaa">Nenhum evento recebido ainda.</p>
+    </div>
+  </div>
+  <div class="box">
+    <h3>⚙ Perfil dos Pais</h3>
+    <p>Gerencie suas informações pessoais e preferências da conta.</p>
+  
+    <div class="page-actions">
+      <button class="btn-secondary" onclick="abrirConfiguracoesPais()">
+        ⚙ Abrir Configurações
+      </button>
+  
+      <button class="btn-secondary" onclick="logout()">
+         Sair
+      </button>
     </div>
   </div>
 </div>
@@ -554,6 +577,47 @@
 
 
 
+<div id="configuracoesPais" class="hidden">
+  <h2 class="page-title">⚙ Configurações do Perfil</h2>
+  <p class="sub">Atualize suas informações pessoais.</p>
+
+  <div class="box">
+    <h3>👤 Informações Pessoais</h3>
+
+    <div class="form-group"><input id="nomePaiConfig" placeholder="Alterar nome"></div>
+
+    <div class="form-group"><input id="emailPaiConfig" placeholder="Alterar email"></div>
+
+    <div class="form-group"><input id="senhaPaiConfig" type="password" placeholder="Nova senha"></div>
+
+    <div class="form-group"><input id="alunoPaiConfig" placeholder="Alterar nome do aluno"></div>
+    
+    <div class="form-group"><input id="turmaPaiConfig" placeholder="Alterar turma do aluno"></div>
+    
+    <button class="btn-secondary" onclick="salvarConfiguracoesPais()">💾 Salvar Alterações</button>
+  </div>
+<div class="box">
+  <h3>🔒 Segurança</h3>
+  <div class="page-actions">
+    <button class="btn-secondary" id="btnAtivar2FAPai" onclick="toggle2FAPai()">
+      📱 Ativar autenticação em 2 etapas
+    </button>
+
+    <button class="btn-secondary" id="btnDesativar2FAPai" style="display: none;" onclick="toggle2FAPai()">
+      🔓 Desativar autenticação em 2 etapas
+    </button>
+
+    <button class="btn-secondary" onclick="logout()">
+      🚪 Sair da Conta
+    </button>
+  </div>
+
+</div>
+  <div class="page-actions">
+    <button class="btn-secondary" onclick="voltarPainelPais()">⬅ Voltar ao Painel</button>
+  </div>
+</div>
+
 
 
 <div id="mediador" class="hidden">
@@ -615,6 +679,7 @@
       <button class="btn-secondary" onclick="voltarPainelMediador()">⬅ Voltar ao Painel</button>
     </div>
   </div>
+  
 
   <div id="mediadorMain">
     <h2 class="page-title">👨‍🏫 Painel do Mediador</h2>
@@ -663,14 +728,17 @@
     </div>
 
     <div class="box">
-      <h3>📚 Histórico do Aluno</h3>
-      <div class="historico">
-        <div class="evento sucesso">✅ Completou atividade de matemática<span>08:15</span></div>
-        <div class="evento sucesso">✅ Participou da roda de leitura<span>09:20</span></div>
-        <div class="evento alerta">⚠ Ficou agitado durante o recreio<span>10:05</span></div>
-        <div class="evento urgente">🚨 Pedido urgente enviado<span>10:12</span></div>
-      </div>
-    </div>
+  <h3>📚 Histórico do Aluno</h3>
+  <div class="historico">
+    <label><input type="checkbox" class="evento-check" value="✅ Completou atividade de matemática | 08:15 | sucesso"> ✅ Completou atividade de matemática <span>08:15</span></label>
+    <label><input type="checkbox" class="evento-check" value="✅ Participou da roda de leitura | 09:20 | sucesso"> ✅ Participou da roda de leitura <span>09:20</span></label>
+    <label><input type="checkbox" class="evento-check" value="⚠ Ficou agitado durante o recreio | 10:05 | alerta"> ⚠ Ficou agitado durante o recreio <span>10:05</span></label>
+    <label><input type="checkbox" class="evento-check" value="🚨 Pedido urgente enviado | 10:12 | urgente"> 🚨 Pedido urgente enviado <span>10:12</span></label>
+  </div>
+  <div class="page-actions" style="margin-top:14px">
+    <button class="btn-secondary" onclick="enviarHistoricoParaPais()">Enviar para os Pais</button>
+  </div>
+</div>
 
     <div class="box">
       <h3>⚙ Perfil do Mediador</h3>
