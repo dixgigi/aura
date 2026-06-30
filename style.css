@@ -172,7 +172,9 @@ input{
     flex-direction:column;
     gap:16px;
 }
-
+.login-panel .form-group{
+    margin-bottom: -16px;
+}
 .login-panel .page-title,
 .login-panel .sub{
     text-align:center;
@@ -316,7 +318,31 @@ select{
 .hidden{
     display:none;
 }
-
+.ems{
+    cursor: pointer;
+    margin-top: 4px;
+    align-self: center;
+    display: inline-block;
+    color: #8aa6b4;;
+}
+.btn-voltar {
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+    align-self: flex-start;
+}
+.btn-cad{
+    background: transparent;
+    color: #8aa6b4;
+    border: 1px solid #8aa6b4;
+    border-radius: 12px;
+    margin-top: 28px;
+}
+.btn-cad:hover {
+    background: #8aa6b4;
+    color: white;
+}
 body.theme-light{
     background:linear-gradient(135deg,#e2f0f1,rgb(98, 200, 218),#045b70);
     color:#0f3d56;
