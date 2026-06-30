@@ -78,6 +78,7 @@
 
 
 <div id="loginPais" class="hidden login-panel">
+  <span class="btn-voltar" onclick="voltar()">←</span>
   <h2 class="page-title">Entrar como Pais</h2>
   <p class="sub">Acesse o painel para acompanhar o dia do seu filho.</p>
 
@@ -90,15 +91,16 @@
 
   <div class="page-actions vertical-actions">
     <button class="btn-secondary" onclick="painelPais()">Entrar</button>
-    <button class="btn-secondary" onclick="abrirRecuperarSenha('pai')">Esqueci minha senha</button>
-    <button class="btn-secondary" onclick="abrirCadastroPais()">Cadastrar</button>
-    <button class="btn-secondary" onclick="voltar()">Voltar</button>
+    <span class="ems" onclick="abrirRecuperarSenha('pai')">Esqueci minha senha</span>
+    <button class="btn-cad" onclick="abrirCadastroPais()">Cadastrar</button>
+    
   </div>
 </div>
 
 
 
 <div id="loginmediador" class="hidden login-panel">
+  <span class="btn-voltar" onclick="voltar()">←</span>
   <h2 class="page-title">Entrar como Mediador</h2>
   <p class="sub">Acesse o painel do mediador para acompanhar o aluno e a família.</p>
 
@@ -111,15 +113,15 @@
 
   <div class="page-actions vertical-actions">
     <button  class="btn-secondary" onclick="painelmediador()">Entrar</button>
-    <button class="btn-secondary" onclick="abrirRecuperarSenha('mediador')">Esqueci minha senha</button>
-    <button class="btn-secondary" onclick="abrirCadastroMediador()">Cadastrar</button>
-    <button class="btn-secondary" onclick="voltar()">Voltar</button>
+    <span class="ems" onclick="abrirRecuperarSenha('pai')">Esqueci minha senha</span>
+    <button class="btn-cad" onclick="abrirCadastroMediador()">Cadastrar</button>
   </div>
 </div>
 
 
 
 <div id="loginAluno" class="hidden login-panel">
+  <span class="btn-voltar" onclick="voltar()">←</span>
   <h2 class="page-title">Entrar como Aluno</h2>
   <p class="sub">Acesse sua área para ver mensagens e localização.</p>
 
@@ -132,8 +134,7 @@
 
   <div class="page-actions vertical-actions">
     <button class="btn-secondary" onclick="painelAluno()">Entrar</button>
-    <button class="btn-secondary" onclick="abrirRecuperarSenha('aluno')">Esqueci minha senha</button>
-    <button class="btn-secondary" onclick="voltar()">Voltar</button>
+    <span class="ems" onclick="abrirRecuperarSenha('pai')">Esqueci minha senha</span>
   </div>
 </div>
 
