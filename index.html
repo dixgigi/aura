@@ -539,10 +539,23 @@
       <button class="action-btn" onclick="enviarMensagemAluno('😔 Estou triste')">😔 Estou triste</button>
     </div>
   </div>
-
+  <div class="box">
+  
+    <h3>💬 Resposta do Mediador</h3>
+  
+    <div class="chat" id="chatRespostaAluno">
+  
+      <div class="msg">
+        Nenhuma resposta ainda.
+      </div>
+  
+    </div>
+  
+  </div>
   <div class="page-actions">
     <button class="btn-secondary" onclick="logout()">Sair</button>
   </div>
+  
 </div>
 
 
@@ -714,7 +727,9 @@
       </div>
       <button class="btn-secondary" onclick="responderAluno()">Enviar resposta</button>
     </div>
+  
 
+    </div>
     <div class="box">
       <h3>👨‍👩‍👧 Chat com os Pais</h3>
       <div class="chat" id="chatPaisMediador">
@@ -817,7 +832,10 @@
   });
 </script>
 
-<script src="script.js"></script>
+<script src="js/script.js"></script>
+<script src="js/aluno.js"></script>
+<script src="js/pais.js"></script>
+<script src="js/mediador.js"></script>
 
 </body>
 </html>
