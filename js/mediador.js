@@ -431,3 +431,9 @@ function enviarHistoricoParaPais() {
     localStorage.setItem('auraHistoricoPais', JSON.stringify(historico));
     alert('✅ Histórico enviado para os pais!');
 }
+window.addEventListener("storage", function (event) {
+    if (event.key === "auraChats") {
+        carregarChatMediador();
+    }
+
+});
