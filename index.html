@@ -504,7 +504,66 @@
     <h2 class="page-title" id="alunoTitle">Olá Lucas 👋</h2>
     <p class="sub" id="alunoSubtitle">Seu espaço tranquilo para saber onde está e contar como se sente.</p>
   </div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Localização</title>
+</head>
+<body>
 
+<h2>Permitir localização</h2>
+
+<button onclick="obterLocalizacao()">Compartilhar localização</button>
+
+<p id="status"></p>
+
+<script>
+function obterLocalizacao() {
+    if (!navigator.geolocation) {
+        document.getElementById("status").innerHTML =
+            "Seu navegador não suporta geolocalização.";
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        sucesso,
+        erro,
+        {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
+        }
+    );
+}
+
+function sucesso(posicao) {
+
+    let latitude = posicao.coords.latitude;
+    let longitude = posicao.coords.longitude;
+
+    document.getElementById("status").innerHTML =
+        "Latitude: " + latitude +
+        "<br>Longitude: " + longitude;
+
+    // Envia para o PHP
+    fetch("salvar.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "latitude=" + latitude + "&longitude=" + longitude
+    });
+}
+
+function erro(e) {
+    document.getElementById("status").innerHTML =
+        "Erro: " + e.message;
+}
+</script>
+
+</body>
+</html>
   <div class="box">
     <h3>Onde você está</h3>
     <div class="map" id="alunoLocation">📍 Escola Municipal</div>
