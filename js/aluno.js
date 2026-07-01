@@ -92,11 +92,11 @@ function setAlunoBodyTheme(theme) {
 
     switch (theme) {
         case "carros":
-            aluno.style.background = "#dbeafe"; // azul claro
+            aluno.style.background = "#5ea1f8"; // azul claro
             break;
 
         case "aranha":
-            aluno.style.background = "#fecaca"; // vermelho claro
+            aluno.style.background = "#f54d4d"; // vermelho claro
             break;
 
         case "espaco":
