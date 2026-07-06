@@ -222,4 +222,45 @@ function carregarHistoricoPais() {
       <span>${ev.hora}</span>
     </div>
   `).join('');
+  // Função para ler a localização e desenhar o mapa na tela dos pais
+function carregarLocalizacaoParaOsPais() {
+    const dadosRaw = localStorage.getItem("auraLocalizacaoAluno");
+    const mapaDiv = document.getElementById("paisMapaAluno");
+    const statusTxt = document.getElementById("paisStatusLocalizacao");
+
+    // Se ainda não houver localização salva, não faz nada
+    if (!dadosRaw || !mapaDiv) return;
+
+    // Converte os dados salvos de texto para Objeto JS
+    const dados = JSON.parse(dadosRaw);
+    
+    // Atualiza o texto informando o horário do envio
+    if (statusTxt) {
+        statusTxt.innerHTML = `🌐 Localização recebida às <strong>${dados.timestamp}</strong>`;
+    }
+
+    // Renderiza o iframe do Google Maps com as coordenadas do aluno
+    mapaDiv.innerHTML = `
+        <iframe 
+            width="100%" 
+            height="250" 
+            frameborder="0" 
+            style="border:0; border-radius: 8px;" 
+            src="https://maps.google.com/maps?q=${dados.latitude},${dados.longitude}&z=16&output=embed">
+        </iframe>`;
+}
+
+// Configura os gatilhos assim que a página dos pais carregar
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Carrega logo de início se já houver uma localização guardada
+    carregarLocalizacaoParaOsPais();
+
+    // 2. ATUALIZAÇÃO EM TEMPO REAL: 
+    // Se o aluno atualizar a localização enquanto a página dos pais estiver aberta, muda na hora!
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'auraLocalizacaoAluno') {
+            carregarLocalizacaoParaOsPais();
+        }
+    });
+});
 }
