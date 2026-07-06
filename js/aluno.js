@@ -98,20 +98,30 @@ function sucesso(posicao) {
     let longitude = posicao.coords.longitude;
 
     const status = document.getElementById("status");
-    if(status) status.innerHTML = "Localização updated! ✅";
+    if(status) status.innerHTML = "Localização atualizada! ✅";
 
     let mapaDiv = document.getElementById("alunoLocation");
     if(mapaDiv) {
-        // Link corrigido para renderizar o iframe do mapa sem erros de sintaxe
         mapaDiv.innerHTML = `<iframe width="100%" height="250" frameborder="0" style="border:0; border-radius: 8px;" src="https://maps.google.com/maps?q=${latitude},${longitude}&z=16&output=embed"></iframe>`;
     }
 
+    // ==== NOVO: Compartilha com o Mediador via LocalStorage ====
+    const dadosLocalizacao = {
+        latitude: latitude,
+        longitude: longitude,
+        timestamp: new Date().toLocaleTimeString()
+    };
+    localStorage.setItem("auraLocalizacaoAluno", JSON.stringify(dadosLocalizacao));
+    // ==========================================================
+
+    // Seu fetch antigo (mantido por compatibilidade)
     fetch("salvar.php", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: "latitude=" + latitude + "&longitude=" + longitude
     }).catch(err => console.log("Persistência PHP externa offline ou ignorada em ambiente local."));
 }
+
 
 function erro(e) {
     const status = document.getElementById("status");
