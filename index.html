@@ -425,11 +425,16 @@
   <h2 class="page-title">Painel dos Pais</h2>
   <p class="sub">Envie vídeos, acompanhe localização e converse com os professores.</p>
 
-  <div class="box">
-    <h3>Localização do Aluno</h3>
-    <div class="map">📍 Lucas está na escola</div>
-  </div>
-
+<!-- Painel de Monitoramento dos Pais -->
+<div class="painel-pais" style="font-family: sans-serif; max-width: 500px; margin: 20px auto; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background-color: #fafafa;">
+    <h3 style="color: #4f46e5; margin-top: 0;">📍 Localização do seu Filho</h3>
+    <p id="paisStatusLocalizacao" style="color: #666; font-size: 14px;">Aguardando o envio da localização do aluno...</p>
+    
+    <!-- Onde o mapa do Google Maps vai aparecer -->
+    <div id="paisMapaAluno" style="width: 100%; min-height: 250px; background-color: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999;">
+        O mapa aparecerá aqui.
+    </div>
+</div>
   <div class="box">
     <h3>Enviar vídeo para o aluno</h3>
     <video id="camera" autoplay muted></video>
@@ -774,6 +779,11 @@ function erro(e) {
       <h3>📍 Localização do Aluno</h3>
       <div class="map">📌 Escola Municipal Aurora<br><br>🕒 Atualizado há 2 minutos</div>
     </div>
+    <div id="mediadorPainel">
+    <h3>Localização do Aluno</h3>
+    <p id="mediadorStatusLocalizacao">Aguardando compartilhamento do aluno...</p>
+    <div id="mediadorMapaAluno"></div>
+</div>
 
     <div class="box">
       <h3>💬 Mensagens Rápidas do Aluno</h3>
