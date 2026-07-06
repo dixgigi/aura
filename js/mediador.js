@@ -435,5 +435,41 @@ window.addEventListener("storage", function (event) {
     if (event.key === "auraChats") {
         carregarChatMediador();
     }
+    // Função para carregar a localização salva
+function carregarLocalizacaoAlunoNoMediador() {
+    const dadosRaw = localStorage.getItem("auraLocalizacaoAluno");
+    const mapaDiv = document.getElementById("mediadorMapaAluno");
+    const statusTxt = document.getElementById("mediadorStatusLocalizacao");
+
+    if (!dadosRaw || !mapaDiv) return;
+
+    const dados = JSON.parse(dadosRaw);
+    
+    if (statusTxt) {
+        statusTxt.innerText = `Última atualização às ${dados.timestamp}`;
+    }
+
+    // Renderiza o mapa na tela do mediador
+    mapaDiv.innerHTML = `
+        <iframe 
+            width="100%" 
+            height="300" 
+            frameborder="0" 
+            style="border:0; border-radius: 8px;" 
+            src="https://maps.google.com/maps?q=${dados.latitude},${dados.longitude}&z=16&output=embed">
+        </iframe>`;
+}
+
+// Executa assim que a página do mediador abrir
+document.addEventListener("DOMContentLoaded", () => {
+    carregarLocalizacaoAlunoNoMediador();
+
+    // ESCUTA EM TEMPO REAL: Se o aluno atualizar a localização com a página do mediador aberta, o mapa atualiza sozinho!
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'auraLocalizacaoAluno') {
+            carregarLocalizacaoAlunoNoMediador();
+        }
+    });
+});
 
 });
