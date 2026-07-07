@@ -1,3 +1,25 @@
+function atualizarDadosAlunoAcompanhado() {
+    const nomeEl = document.getElementById("nomeAlunoAcompanhado");
+    const infoEl = document.getElementById("infoAlunoAcompanhado");
+    const statusEl = document.getElementById("statusAlunoAcompanhado");
+
+    if (!nomeEl && !infoEl && !statusEl) return;
+
+    const alunoAtual = JSON.parse(localStorage.getItem("auraAlunoAtual") || "null");
+    const nome = alunoAtual?.nome || localStorage.getItem("auraAlunoNome") || "Aluno não informado";
+    const turma = alunoAtual?.turma || "";
+    const status = alunoAtual?.status || "✅ Na escola";
+
+    if (nomeEl) nomeEl.textContent = nome;
+    if (infoEl) {
+        const dadosInfo = [];
+        if (turma) dadosInfo.push(`Turma ${turma}`);
+        if (dadosInfo.length === 0) dadosInfo.push("Turma não informada");
+        infoEl.textContent = dadosInfo.join(" • ");
+    }
+    if (statusEl) statusEl.textContent = `Status: ${status}`;
+}
+
 function painelmediador() {
 
     const email = document.querySelector('#loginmediador input[placeholder="Email"]').value.trim();
@@ -57,7 +79,8 @@ function painelmediador() {
     );
 
     carregarChatMediador();
-
+    atualizarDadosAlunoAcompanhado();
+    carregarLocalizacaoAlunoNoMediador();
 
     document.getElementById("mediador").classList.remove("hidden");
 
@@ -435,41 +458,58 @@ window.addEventListener("storage", function (event) {
     if (event.key === "auraChats") {
         carregarChatMediador();
     }
-    // Função para carregar a localização salva
+
+    if (event.key === "auraAlunoAtual" || event.key === "auraAlunoNome" || event.key === "auraAlunoGenero") {
+        atualizarDadosAlunoAcompanhado();
+    }
+});
+
 function carregarLocalizacaoAlunoNoMediador() {
     const dadosRaw = localStorage.getItem("auraLocalizacaoAluno");
     const mapaDiv = document.getElementById("mediadorMapaAluno");
     const statusTxt = document.getElementById("mediadorStatusLocalizacao");
 
-    if (!dadosRaw || !mapaDiv) return;
+    if (!mapaDiv) return;
 
-    const dados = JSON.parse(dadosRaw);
-    
-    if (statusTxt) {
-        statusTxt.innerText = `Última atualização às ${dados.timestamp}`;
+    if (!dadosRaw) {
+        if (statusTxt) {
+            statusTxt.innerText = "Aguardando compartilhamento do aluno...";
+        }
+        mapaDiv.innerHTML = "O mapa aparecerá aqui quando o aluno compartilhar a localização.";
+        return;
     }
 
-    // Renderiza o mapa na tela do mediador
-    mapaDiv.innerHTML = `
-        <iframe 
-            width="100%" 
-            height="300" 
-            frameborder="0" 
-            style="border:0; border-radius: 8px;" 
-            src="https://maps.google.com/maps?q=${dados.latitude},${dados.longitude}&z=16&output=embed">
-        </iframe>`;
+    try {
+        const dados = JSON.parse(dadosRaw);
+        
+        if (statusTxt) {
+            statusTxt.innerText = `Última atualização às ${dados.timestamp}`;
+        }
+
+        mapaDiv.innerHTML = `
+            <iframe 
+                width="100%" 
+                height="300" 
+                frameborder="0" 
+                style="border:0; border-radius: 8px;" 
+                src="https://maps.google.com/maps?q=${dados.latitude},${dados.longitude}&z=16&output=embed">
+            </iframe>`;
+    } catch (erro) {
+        console.log("Erro ao carregar localização para o mediador:", erro);
+        if (statusTxt) {
+            statusTxt.innerText = "Não foi possível carregar a localização no momento.";
+        }
+    }
 }
 
 // Executa assim que a página do mediador abrir
 document.addEventListener("DOMContentLoaded", () => {
+    atualizarDadosAlunoAcompanhado();
     carregarLocalizacaoAlunoNoMediador();
 
-    // ESCUTA EM TEMPO REAL: Se o aluno atualizar a localização com a página do mediador aberta, o mapa atualiza sozinho!
     window.addEventListener('storage', (e) => {
         if (e.key === 'auraLocalizacaoAluno') {
             carregarLocalizacaoAlunoNoMediador();
         }
     });
-});
-
 });
