@@ -83,10 +83,10 @@
   <p class="sub">Acesse o painel para acompanhar o dia do seu filho.</p>
 
   <div class="form-group">
-    <input placeholder="Email">
+    <input id="emailPaisLogin" placeholder="Email">
   </div>
   <div class="form-group">
-    <input type="password" placeholder="Senha">
+    <input id="senhaPaisLogin" type="password" placeholder="Senha">
   </div>
 
   <div class="page-actions vertical-actions">
@@ -509,69 +509,14 @@
     <h2 class="page-title" id="alunoTitle">Olá Lucas 👋</h2>
     <p class="sub" id="alunoSubtitle">Seu espaço tranquilo para saber onde está e contar como se sente.</p>
   </div>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<title>Localização</title>
-</head>
-<body>
 
-<h2>Permitir localização</h2>
-
-<button onclick="obterLocalizacao()">Compartilhar localização</button>
-
-<p id="status"></p>
-
-<script>
-function obterLocalizacao() {
-    if (!navigator.geolocation) {
-        document.getElementById("status").innerHTML =
-            "Seu navegador não suporta geolocalização.";
-        return;
-    }
-
-    navigator.geolocation.getCurrentPosition(
-        sucesso,
-        erro,
-        {
-            enableHighAccuracy: true,
-            timeout: 10000,
-            maximumAge: 0
-        }
-    );
-}
-
-function sucesso(posicao) {
-
-    let latitude = posicao.coords.latitude;
-    let longitude = posicao.coords.longitude;
-
-    document.getElementById("status").innerHTML =
-        "Latitude: " + latitude +
-        "<br>Longitude: " + longitude;
-
-    // Envia para o PHP
-    fetch("salvar.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: "latitude=" + latitude + "&longitude=" + longitude
-    });
-}
-
-function erro(e) {
-    document.getElementById("status").innerHTML =
-        "Erro: " + e.message;
-}
-</script>
-
-</body>
-</html>
   <div class="box">
-    <h3>Onde você está</h3>
-    <div class="map" id="alunoLocation">📍 Escola Municipal</div>
+    <h3>📍 Onde você está</h3>
+    <p id="status" style="font-size: 14px; color: #666; margin-bottom: 10px;">Clique no botão para compartilhar sua localização</p>
+    <div class="map" id="alunoLocation" style="min-height: 250px; display: flex; align-items: center; justify-content: center; background: #f0f0f0; border-radius: 8px; margin-bottom: 10px;">📍 Seu mapa aparecerá aqui</div>
+    <div class="page-actions">
+      <button class="btn-secondary" onclick="obterLocalizacao()">📍 Compartilhar localização</button>
+    </div>
   </div>
 
   <div class="box">
@@ -768,9 +713,9 @@ function erro(e) {
       <div class="perfil-aluno">
         <img src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png" width="80">
         <div>
-          <h3>Lucas Oliveira</h3>
-          <p>10 anos • Turma 5º A</p>
-          <p>Status: ✅ Na escola</p>
+          <h3 id="nomeAlunoAcompanhado">Carregando...</h3>
+          <p id="infoAlunoAcompanhado">Aguardando cadastro do aluno</p>
+          <p id="statusAlunoAcompanhado">Status: ✅ Na escola</p>
         </div>
       </div>
     </div>
