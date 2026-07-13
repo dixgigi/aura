@@ -22,9 +22,10 @@ function painelPais() {
     document.querySelector('.container').classList.remove('sem-caixa');
     esconderTudo();
     localStorage.setItem('auraUserAtual', JSON.stringify({ tipo: 'pai', email: email }));
-    carregarChatPais();
-    carregarHistoricoPais();
-    document.getElementById("pais").classList.remove("hidden")
+   carregarChatPais();
+carregarHistoricoPais();
+carregarLocalizacaoParaOsPais();
+document.getElementById("pais").classList.remove("hidden");
 }
 function carregarChatPais() {
     let chat = document.getElementById("chatPais");
@@ -44,6 +45,7 @@ function carregarChatPais() {
         chat.appendChild(div);
     });
     chat.scrollTop = chat.scrollHeight;
+
 }
 function enviarMsgPais() {
     let msg = document.getElementById("msgPais").value.trim();
@@ -217,50 +219,76 @@ function carregarHistoricoPais() {
     }
 
     container.innerHTML = historico.map(ev => `
-    <div class="evento ${ev.tipo}">
-      ${ev.texto}
-      <span>${ev.hora}</span>
-    </div>
-  `).join('');
-  // Função para ler a localização e desenhar o mapa na tela dos pais
+        <div class="evento ${ev.tipo}">
+            ${ev.texto}
+            <span>${ev.hora}</span>
+        </div>
+    `).join('');
+}
+
+// ===============================
+// LOCALIZAÇÃO DO ALUNO - PAIS
+// ===============================
+
 function carregarLocalizacaoParaOsPais() {
+
     const dadosRaw = localStorage.getItem("auraLocalizacaoAluno");
     const mapaDiv = document.getElementById("paisMapaAluno");
     const statusTxt = document.getElementById("paisStatusLocalizacao");
 
-    // Se ainda não houver localização salva, não faz nada
-    if (!dadosRaw || !mapaDiv) return;
+    if (!mapaDiv) return;
 
-    // Converte os dados salvos de texto para Objeto JS
-    const dados = JSON.parse(dadosRaw);
-    
-    // Atualiza o texto informando o horário do envio
-    if (statusTxt) {
-        statusTxt.innerHTML = `🌐 Localização recebida às <strong>${dados.timestamp}</strong>`;
+    if (!dadosRaw) {
+
+        if (statusTxt) {
+            statusTxt.innerText = "Aguardando compartilhamento do aluno...";
+        }
+
+        mapaDiv.innerHTML =
+            "O mapa aparecerá aqui quando o aluno compartilhar a localização.";
+
+        return;
     }
 
-    // Renderiza o iframe do Google Maps com as coordenadas do aluno
-    mapaDiv.innerHTML = `
-        <iframe 
-            width="100%" 
-            height="250" 
-            frameborder="0" 
-            style="border:0; border-radius: 8px;" 
-            src="https://maps.google.com/maps?q=${dados.latitude},${dados.longitude}&z=16&output=embed">
-        </iframe>`;
+    try {
+
+        const dados = JSON.parse(dadosRaw);
+
+        if (statusTxt) {
+            statusTxt.innerText = `Última atualização às ${dados.timestamp}`;
+        }
+
+        mapaDiv.innerHTML = `
+            <iframe
+                width="100%"
+                height="300"
+                frameborder="0"
+                style="border:0;border-radius:8px;"
+                src="https://maps.google.com/maps?q=${dados.latitude},${dados.longitude}&z=16&output=embed">
+            </iframe>`;
+
+    } catch (erro) {
+
+        console.log("Erro ao carregar localização dos pais:", erro);
+
+        if (statusTxt) {
+            statusTxt.innerText = "Não foi possível carregar a localização.";
+        }
+
+    }
+
 }
 
-// Configura os gatilhos assim que a página dos pais carregar
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Carrega logo de início se já houver uma localização guardada
+
     carregarLocalizacaoParaOsPais();
 
-    // 2. ATUALIZAÇÃO EM TEMPO REAL: 
-    // Se o aluno atualizar a localização enquanto a página dos pais estiver aberta, muda na hora!
-    window.addEventListener('storage', (e) => {
-        if (e.key === 'auraLocalizacaoAluno') {
+    window.addEventListener("storage", (e) => {
+
+        if (e.key === "auraLocalizacaoAluno") {
             carregarLocalizacaoParaOsPais();
         }
+
     });
+
 });
-}
