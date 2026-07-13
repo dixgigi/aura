@@ -422,64 +422,151 @@
 
 
 <div id="pais" class="hidden">
-  <h2 class="page-title">Painel dos Pais</h2>
-  <p class="sub">Envie vídeos, acompanhe localização e converse com os professores.</p>
 
-<!-- Painel de Monitoramento dos Pais -->
-<div class="painel-pais" style="font-family: sans-serif; max-width: 500px; margin: 20px auto; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background-color: #fafafa;">
-    <h3 style="color: #4f46e5; margin-top: 0;">📍 Localização do seu Filho</h3>
-    <p id="paisStatusLocalizacao" style="color: #666; font-size: 14px;">Aguardando o envio da localização do aluno...</p>
-    
-    <!-- Onde o mapa do Google Maps vai aparecer -->
-    <div id="paisMapaAluno" style="width: 100%; min-height: 250px; background-color: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999;">
+  <h2 class="page-title">👨‍👩‍👧 Painel dos Pais</h2>
+  <p class="sub">
+    Envie vídeos, acompanhe a localização do aluno e converse com os professores.
+  </p>
+<div class="perfil-aluno" style="margin-top:15px;">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png"
+          width="80">
+
+        <div>
+          <h3 id="nomeAlunoPais">Aluno</h3>
+          <p id="infoAlunoPais">Aguardando informações...</p>
+          <p id="statusAlunoPais">Status: --</p>
+        </div>
+      </div>
+
+  <!-- LOCALIZAÇÃO DO ALUNO -->
+  <div class="box">
+
+    <div id="paisPainel">
+
+      <h3>📍 Localização do Aluno</h3>
+
+      <p id="paisStatusLocalizacao">
+        Aguardando compartilhamento do aluno...
+      </p>
+
+      <div id="paisMapaAluno"
+           style="
+             width:100%;
+             height:300px;
+             background:#eee;
+             border-radius:10px;
+             overflow:hidden;
+             display:flex;
+             align-items:center;
+             justify-content:center;
+             color:#888;
+           ">
         O mapa aparecerá aqui.
+      </div>
+
+      
     </div>
-</div>
+
+  </div>
+
+  <!-- ENVIAR VÍDEO -->
+
   <div class="box">
-    <h3>Enviar vídeo para o aluno</h3>
+
+    <h3>📹 Enviar vídeo para o aluno</h3>
+
     <video id="camera" autoplay muted></video>
+
     <div class="page-actions">
-      <button class="btn-secondary" onclick="iniciarCamera()">Abrir Câmera</button>
-      <button class="btn-secondary" onclick="gravarVideo()">Gravar</button>
-      <button class="btn-secondary" onclick="pararGravacao()">Parar</button>
+      <button class="btn-secondary" onclick="iniciarCamera()">
+        Abrir Câmera
+      </button>
+
+      <button class="btn-secondary" onclick="gravarVideo()">
+        Gravar
+      </button>
+
+      <button class="btn-secondary" onclick="pararGravacao()">
+        Parar
+      </button>
     </div>
+
     <video id="preview" controls></video>
+
   </div>
+
+  <!-- CHAT -->
+
   <div class="box">
-    <h3>Chat com Professores</h3>
+
+    <h3>💬 Chat com Professores</h3>
+
     <div class="chat" id="chatPais">
-      <div class="msg">Professora: Lucas teve um ótimo dia!</div>
+      <div class="msg">
+        Professora: Lucas teve um ótimo dia!
+      </div>
     </div>
+
     <div class="form-group">
-      <input id="msgPais" placeholder="Digite mensagem">
+      <input id="msgPais" placeholder="Digite uma mensagem">
     </div>
+
     <div class="page-actions">
-      <button class="btn-secondary" onclick="enviarMsgPais()">Enviar</button>
+      <button class="btn-secondary" onclick="enviarMsgPais()">
+        Enviar
+      </button>
     </div>
+
   </div>
+
+  <!-- HISTÓRICO -->
+
   <div class="box">
+
     <h3>📚 Histórico do Aluno</h3>
-    <p class="sub" style="text-align:left">Eventos enviados pelo mediador:</p>
+
+    <p class="sub" style="text-align:left">
+      Eventos enviados pelo mediador:
+    </p>
+
     <div class="historico" id="historicoPais">
-      <p style="color:#aaa">Nenhum evento recebido ainda.</p>
+      <p style="color:#999;">
+        Nenhum evento recebido ainda.
+      </p>
     </div>
+
   </div>
+
+  <!-- PERFIL -->
+
   <div class="box">
+
     <h3>⚙ Perfil dos Pais</h3>
-    <p>Gerencie suas informações pessoais e preferências da conta.</p>
-  
+
+    <p>
+      Gerencie suas informações pessoais e preferências da conta.
+    </p>
+
     <div class="page-actions">
-      <button class="btn-secondary" onclick="abrirConfiguracoesPais()">
+
+      <button
+        class="btn-secondary"
+        onclick="abrirConfiguracoesPais()">
         ⚙ Abrir Configurações
       </button>
-  
-      <button class="btn-secondary" onclick="logout()">
-         Sair
-      </button>
-    </div>
-  </div>
-</div>
 
+      <button
+        class="btn-secondary"
+        onclick="logout()">
+        Sair
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 
 
 
@@ -721,9 +808,6 @@
     </div>
 
     <div class="box">
-      <h3>📍 Localização do Aluno</h3>
-      <div class="map">📌 Escola Municipal Aurora<br><br>🕒 Atualizado há 2 minutos</div>
-    </div>
     <div id="mediadorPainel">
     <h3>Localização do Aluno</h3>
     <p id="mediadorStatusLocalizacao">Aguardando compartilhamento do aluno...</p>
