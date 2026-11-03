@@ -1,7 +1,7 @@
 body{
     font-family: Arial, sans-serif;
     margin:0;
-    background:linear-gradient(135deg,#e2f0f1,rgb(98, 200, 218),#045b70 );
+    background:linear-gradient(135deg,#55e2ec,rgb(5, 50, 102),#72d7f0 );
     min-height:100vh;
     display:flex;
     flex-direction:column;
@@ -376,7 +376,7 @@ select{
     color: white;
 }
 body.theme-light{
-    background:linear-gradient(135deg,#e2f0f1,rgb(98, 200, 218),#045b70);
+    background:linear-gradient(135deg,#54cdd6,rgb(4, 32, 92),#73dbf5);
     color:#0f3d56;
 }
 
@@ -529,7 +529,7 @@ body.font-small{
 }
 
 .quem-somos-page{
-    background:linear-gradient(135deg,#0f4db5,#5ab0ff,#1055a8);
+    background:linear-gradient(135deg,#85ccec,#082f53,#7cc6e9);
     color:#102a4b;
 }
 
@@ -558,7 +558,7 @@ body.font-small{
 
 .quem-somos-page .autism-box{
     border:2px solid #67b8ff;
-    background:linear-gradient(180deg,rgba(128,209,255,0.16),rgba(255,255,255,0.92));
+    background:linear-gradient(180deg,rgba(4, 53, 117, 0.16),rgba(98, 211, 245, 0.92));
     box-shadow:0 14px 30px rgba(51, 102, 153, 0.12);
 }
 
@@ -1394,5 +1394,6 @@ body.theme-dark #aluno[style*="background: #fef3c7"],
 body.theme-dark #aluno.estrelas {
     background: #78350f !important; 
 }
+
 
 
